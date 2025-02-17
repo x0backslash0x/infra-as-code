@@ -1,0 +1,7 @@
+- name: Infrastructure As Code Labo 2
+  hosts: managed-nodes
+  tasks:
+
+  - name: SELinux als permissive instellen
+    ansible.builtin.command: setenforce 0
+    become: yes

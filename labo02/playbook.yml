@@ -47,3 +47,11 @@
       state: started
       enabled: yes
     become: yes
+
+  - name: installatie nmap & mc
+    ansible.builtin.dnf:
+      name:
+        - nmap
+        - mc
+      state: present
+    become: yes

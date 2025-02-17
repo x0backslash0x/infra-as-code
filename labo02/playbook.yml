@@ -9,3 +9,7 @@
   - name: hostname aanpassen
     ansible.builtin.command: hostname bahamut
     become: yes
+
+  - name: bestand aanmaken
+    ansible.builtin.command: touch /test.txt
+    become: yes

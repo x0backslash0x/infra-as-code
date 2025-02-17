@@ -37,6 +37,7 @@
     ansible.builtin.yum_repository:
       name: docker-ce-edge
       description: the docer ce edge repository for RHEL
-      baseurl: https://download.docker.com/linux/rhel/docker-ce.repo
+      # baseurl: https://download.docker.com/linux/rhel/docker-ce.repo deze link komt van de Docker online documentatie
+      baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
       enabled: true
     become: yes

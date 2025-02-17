@@ -32,3 +32,11 @@
       name: dnf-plugins-core
       state: present
     become: yes
+
+  - name: Docker - Enable Edge repo
+    ansible.builtin.yum_repository:
+      name: docker-ce-edge
+      description: the docer ce edge repository for RHEL
+      baseurl: https://download.docker.com/linux/rhel/docker-ce.repo
+      enabled: true
+    become: yes

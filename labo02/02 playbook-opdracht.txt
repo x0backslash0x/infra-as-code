@@ -1,0 +1,14 @@
+installeren
+* docker
+* nmap
+* mc
+
+starten bij boot
+* Docker
+
+* SELINUX op permissive zet
+* De rocky vm de naam geeft van een een mythologisch ofmagisch figuur
+* De omgeving een vast ip-adres geeft
+* Een lege file genaamd test.txt in /root zet.
+* Een user jacko toevoegd voormij.
+• Zorgt dat de user kan inloggen met deze key: <public key in pdf>

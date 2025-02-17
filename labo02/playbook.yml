@@ -5,3 +5,7 @@
   - name: SELinux als permissive instellen
     ansible.builtin.command: setenforce 0
     become: yes
+
+  - name: hostname aanpassen
+    ansible.builtin.command: hostname bahamut
+    become: yes

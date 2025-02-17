@@ -1,5 +1,6 @@
 - name: Infrastructure As Code Labo 2
   hosts: managed-nodes
+  gather_facts: False
   tasks:
 
   - name: SELinux als permissive instellen

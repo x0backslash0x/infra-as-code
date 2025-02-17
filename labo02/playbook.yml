@@ -38,6 +38,10 @@
       name: docker-ce-edge
       description: the docer ce edge repository for RHEL
       # baseurl: https://download.docker.com/linux/rhel/docker-ce.repo deze link komt van de Docker online documentatie
-      baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable
+      baseurl: https://download.docker.com/linux/centos/$releasever/$basearch/stable # deze link komt uit het repo .repo bestand van de link hierboven
       enabled: true
+    become: yes
+
+  - name: systeem update
+    ansible.builtin.command: yum update
     become: yes

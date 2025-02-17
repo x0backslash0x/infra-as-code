@@ -55,3 +55,12 @@
         - mc
       state: present
     become: yes
+
+  - name: static ip instellen
+    community.general.nmcli:
+      conn_name: "wired"
+      type: "ethernet"
+      ifname: ens160
+      ip4: 192.168.12.140/24
+      state: present
+    become: yes

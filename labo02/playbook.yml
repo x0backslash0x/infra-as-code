@@ -13,3 +13,9 @@
   - name: bestand aanmaken
     ansible.builtin.command: touch /test.txt
     become: yes
+
+  - name: gebruiker jacko aanmaken
+    ansible.builtin.user:
+      name: jacko
+      comment: voor Jan
+    become: yes

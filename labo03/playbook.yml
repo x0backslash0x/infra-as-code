@@ -16,8 +16,13 @@
   # - name: hostname aanpassen
   #   ansible.builtin.command: hostname bahamut
 
-  # - name: bestand aanmaken
-  #   ansible.builtin.command: touch /test.txt
+  - name: bestand aanmaken, eigenaan en rechten instellen (744)
+    ansible.builtin.file:
+      path: /test.txt
+      state: touch
+      owner: rocky
+      group: rocky
+      mode: u+rwx,g+r,o+r
 
   # - name: gebruiker jacko aanmaken
   #   ansible.builtin.user:

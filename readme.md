@@ -24,3 +24,4 @@ Neem de playbook van vorige week en breid je playbook uit met minstens 7 modules
 
 1. selinux
 2. package voor installatie
+3. file voor aanmaken bestand en bestandrechten

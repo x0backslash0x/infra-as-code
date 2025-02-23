@@ -21,3 +21,5 @@ OLOD Infrastructure As Code
 
 # Labo 3
 Neem de playbook van vorige week en breid je playbook uit met minstens 7 modules uit voorgaande lijst.
+
+1. selinux

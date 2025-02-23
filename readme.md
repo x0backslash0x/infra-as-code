@@ -23,3 +23,4 @@ OLOD Infrastructure As Code
 Neem de playbook van vorige week en breid je playbook uit met minstens 7 modules uit voorgaande lijst.
 
 1. selinux
+2. package voor installatie

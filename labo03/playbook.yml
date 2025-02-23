@@ -30,22 +30,32 @@
   #     state: present
   #     key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDimr3b/EBcBs4ienxG4sRRxjmvA1j1s2Ovi+KIf7VoCZYPMOIAA2Pa7MQQRlh6eTXPkx6tWRpIlJZDUdcc8GqZ5xTEmw+AKzys253CWiRny7nnBbIfrNhW7wye8f3dB988AZ6lwcRMXA5QxjaQC/ToEdlZ0JpA+wLlZXRhc+NA1phnnSVNAtBptlL4Bet0rFquvKNJrZKRVmbVNJ4IR0zDI8NJMnVGdKC17JswnhDVGb6g5k05wXFHGbKPVN6MSatsnBO2md2FHx0QyuHcfbFegSWB/JCQ0fYabIjFCkkJ1lqQMHHPa7OvPGYii5u3STVgQL19G8YDI6ORLhILu+en jacko@MacBook-Pro.local"
 
-  # - name: Docker - install dnf plugin
-  #   ansible.builtin.dnf:
-  #     name: dnf-plugins-core
-  #     state: present
+  - name: Docker - install dnf plugin
+    ansible.builtin.dnf:
+      name: dnf-plugins-core
+      state: present
 
-  # - name: set up docker repository
-  #   ansible.builtin.command: sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+  - name: set up docker repository
+    ansible.builtin.command: sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+  - name: Docker installeren
+    ansible.builtin.package:
+      name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+      state: latest
+
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
 
   # - name: systeem update
   #   ansible.builtin.command: yum update
-
-  # - name: Start Docker service
-  #   service:
-  #     name: docker
-  #     state: started
-  #     enabled: yes
 
   # - name: installatie nmap & mc
   #   ansible.builtin.dnf:

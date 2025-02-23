@@ -18,3 +18,6 @@ OLOD Infrastructure As Code
 * pip ([ansible.builtin.pip](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pip_module.html))
 * local gen ([community.general.locale_gen](https://docs.ansible.com/ansible/latest/collections/community/general/locale_gen_module.html))
 * selinux ([ansible.posix.selinux](https://docs.ansible.com/ansible/latest/collections/ansible/posix/selinux_module.html))
+
+# Labo 3
+Neem de playbook van vorige week en breid je playbook uit met minstens 7 modules uit voorgaande lijst.

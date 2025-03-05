@@ -1,7 +1,7 @@
 ---
 - name: Infrastructure As Code Labo 4
   hosts: managednodes
-  gather_facts: False
+  gather_facts: True
   remote_user: rocky
   become: yes
   # tasks:
@@ -18,4 +18,5 @@
     # - { role: sshkeyinstall, username: "root", ssh_key: "{{ lookup('file', 'jacko.pub') }}"}
     # - down
     # - updateall
-    - minimalinstall
+    # - minimalinstall
+    - dockerinstall

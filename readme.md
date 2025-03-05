@@ -44,3 +44,4 @@ Aangemaakte rollen
 - down: Unconditionally shuts down the machine
 - updateall: Updates all installed packages on the host(s)
 - minimalinstall: Installs a minimal collection of essential packages
+- dockerinstall: Install docker from the official repo.

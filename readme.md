@@ -27,3 +27,6 @@ Een basis bibliotheek maken met volgende rollen
 * reboot: Reboot
 * down: Volledig afzetten van de VM
 * verzin zelf nog twee rollen die je altijd kan gebruiken
+
+## Gebruikte modules
+* ([ansible.builtin.hostname](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/hostname_module.htm))

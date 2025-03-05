@@ -1,0 +1,5 @@
+# tasks file for role 'naam'
+- name: hostname aanpassen
+  ansible.builtin.hostname:
+    name: ansible-host
+    # use: {{ dist-name }} instellen afhandelijk van gedetecteerde distributie

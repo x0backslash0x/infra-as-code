@@ -1,0 +1,8 @@
+---
+- name: Infrastructure As Code Labo 4
+  hosts: managed-nodes
+  gather_facts: False
+  become: yes
+  roles:
+    - naam
+  

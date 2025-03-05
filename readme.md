@@ -43,3 +43,4 @@ Aangemaakte rollen
 - sshkeyinstall: Adds an ssh public key to the authorized_keys of the root user.
 - down: Unconditionally shuts down the machine
 - updateall: Updates all installed packages on the host(s)
+- minimalinstall: Installs a minimal collection of essential packages

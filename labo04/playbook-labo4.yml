@@ -1,8 +1,12 @@
 ---
 - name: Infrastructure As Code Labo 4
   hosts: managed-nodes
-  gather_facts: False
+  gather_facts: True
   become: yes
+  tasks:
+  - name: show fact available on the system
+    ansible.builtin.debug:
+      var: ansible_facts
   roles:
     # - { role: naam, hostname: "ansible-host" }
     # - selinuxoff
@@ -10,4 +14,4 @@
     # - selinux
     # - reboot
     # - { role: createuser, username: "randomuser", userpass: "$6$Hl7Jfse/PwK7bRHG$HoEFjbr2LNbflMFlh/Gf76k8q58pMGT0bmN5FzqPrEw/RceuXdeoSudBjlUkPfzpeypPtfcOpcR5gsyRaq0OV." }
-    - { role: sshkeyinstall, username: "root", ssh_key: "{{ lookup('file', 'jacko.pub') }}"}
+    # - { role: sshkeyinstall, username: "root", ssh_key: "{{ lookup('file', 'jacko.pub') }}"}

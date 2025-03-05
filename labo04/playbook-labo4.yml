@@ -1,10 +1,11 @@
 ---
 - name: Infrastructure As Code Labo 4
   hosts: managed-nodes
-  gather_facts: False
+  gather_facts: True
   become: yes
   roles:
-    - { role: naam, hostname: "ansible-host" }
+    # - { role: naam, hostname: "ansible-host" }
     # - selinuxoff
     # - selinuxon
+    - selinux
   

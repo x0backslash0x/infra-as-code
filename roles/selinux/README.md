@@ -1,9 +1,7 @@
-Role Name
+Role selinux
 =========
 
-selinuxoff
-
-Sets SELinux to disabled
+Sets SELinux to disabled or permissive, depending on its current state.
 
 Requirements
 ------------
@@ -28,9 +26,12 @@ A list of other roles hosted on Galaxy should go here, plus any details in regar
 
 Example Playbook
 ----------------
-    - hosts: servers
+    - name: <play name>
+      hosts: <hosts>
+      gather_facts: True
+      become: yes
       roles:
-         - selinuxoff
+         - selinux
 
 License
 -------

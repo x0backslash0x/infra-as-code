@@ -1,6 +1,0 @@
----
-# tasks file for selinuxoff
-- name: selinuxoff
-  ansible.posix.selinux:
-    policy: targeted
-    state: disabled

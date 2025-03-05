@@ -31,4 +31,4 @@ Een basis bibliotheek maken met volgende rollen
 ## Gebruikte modules
 * ([ansible.builtin.hostname](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/hostname_module.htm))
 * ansible.posix.selinux
-* ansible.builtin.reboot
+* [ansible.builtin.reboot](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html)

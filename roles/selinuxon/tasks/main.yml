@@ -1,0 +1,6 @@
+---
+# tasks file for selinuxon
+- name: selinuxon
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing

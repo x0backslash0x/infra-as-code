@@ -1,7 +1,7 @@
 ---
 - name: Infrastructure As Code Labo 4
-  hosts: managed-nodes
-  gather_facts: False
+  hosts: managednodes
+  gather_facts: True
   become: yes
   # tasks:
   # - name: show fact available on the system
@@ -15,4 +15,5 @@
     # - reboot
     # - { role: createuser, username: "randomuser", userpass: "$6$Hl7Jfse/PwK7bRHG$HoEFjbr2LNbflMFlh/Gf76k8q58pMGT0bmN5FzqPrEw/RceuXdeoSudBjlUkPfzpeypPtfcOpcR5gsyRaq0OV." }
     # - { role: sshkeyinstall, username: "root", ssh_key: "{{ lookup('file', 'jacko.pub') }}"}
-    - down
+    # - down
+    - updateall

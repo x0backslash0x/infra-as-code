@@ -42,3 +42,4 @@ Aangemaakte rollen
 - selinux: Sets SELinux to disabled or permissive, depending on its current state.
 - sshkeyinstall: Adds an ssh public key to the authorized_keys of the root user.
 - down: Unconditionally shuts down the machine
+- updateall: Updates all installed packages on the host(s)

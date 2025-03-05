@@ -32,3 +32,12 @@ Een basis bibliotheek maken met volgende rollen
 * ([ansible.builtin.hostname](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/hostname_module.htm))
 * ansible.posix.selinux
 * [ansible.builtin.reboot](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html)
+* [ansible.posix.authorized_key](https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html)
+
+## Roles
+Aangemaakte rollen
+- createuser: Creates a user on the host
+- naam: hostname aanpassen
+- reboot: Reboots the host(s).
+- selinux: Sets SELinux to disabled or permissive, depending on its current state.
+- sshkeyinstall: Adds an ssh public key to the authorized_keys of the root user.

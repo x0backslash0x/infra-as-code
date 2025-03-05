@@ -4,5 +4,6 @@
   gather_facts: False
   become: yes
   roles:
-    - naam
+    # - naam
+    - selinuxoff
   

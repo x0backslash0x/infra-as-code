@@ -4,7 +4,7 @@
   gather_facts: False
   become: yes
   roles:
-    # - naam
+    - { role: naam, hostname: "ansible-host" }
     # - selinuxoff
-    - selinuxon
+    # - selinuxon
   

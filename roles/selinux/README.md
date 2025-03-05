@@ -1,7 +1,7 @@
 Role selinux
 =========
 
-Sets SELinux to disabled or permissive, depending on its current state.
+Sets SELinux to disabled or permissive, depending on its current state. Reboots host(s) for changes to take effect.
 
 Requirements
 ------------
@@ -22,7 +22,7 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- reboot role
 
 Example Playbook
 ----------------

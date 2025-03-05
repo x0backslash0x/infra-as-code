@@ -11,3 +11,7 @@
     policy: targeted
     state: enforcing
   when: ansible_selinux.status == "disabled"
+
+- name: restart host
+  import_role:
+    name: reboot

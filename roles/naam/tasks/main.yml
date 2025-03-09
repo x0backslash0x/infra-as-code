@@ -1,0 +1,4 @@
+# tasks file for role 'naam'
+- name: hostname aanpassen
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"

@@ -1,0 +1,3 @@
+---
+# vars file for minimalinstall
+minimal_list: "epel-release, nc, mtr, git"

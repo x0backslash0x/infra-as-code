@@ -1,0 +1,22 @@
+---
+- name: Infrastructure As Code Labo 4
+  hosts: managednodes
+  gather_facts: True
+  remote_user: rocky
+  become: yes
+  # tasks:
+  # - name: show fact available on the system
+  #   ansible.builtin.debug:
+  #     var: ansible_facts
+  roles:
+    # - { role: naam, hostname: "ansible-host" }
+    # - selinuxoff
+    # - selinuxon
+    # - selinux
+    # - reboot
+    # - { role: createuser, username: "randomuser", userpass: "$6$Hl7Jfse/PwK7bRHG$HoEFjbr2LNbflMFlh/Gf76k8q58pMGT0bmN5FzqPrEw/RceuXdeoSudBjlUkPfzpeypPtfcOpcR5gsyRaq0OV." }
+    # - { role: sshkeyinstall, username: "root", ssh_key: "{{ lookup('file', 'jacko.pub') }}"}
+    # - down
+    # - updateall
+    # - minimalinstall
+    - dockerinstall

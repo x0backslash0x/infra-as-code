@@ -1,0 +1,14 @@
+---
+# tasks file for minimalinstall
+# - name: Install on Debian-based Systems  # disabled for now as nc and epel packages not available on debian
+  # when: ansible_facts.os_family == "Debian"
+  # ansible.builtin.apt:
+  #   update_cache: yes
+  #   pkg: "{{ minimal_list }}"
+
+- name: Install on RHEL-based Systems
+  # when: ansible_facts.os_family == "RedHat"
+  ansible.builtin.dnf:
+    # name: "epel-release, nc, mtr, git"
+    name: "{{ minimal_list }}"
+    state: latest

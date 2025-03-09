@@ -1,0 +1,19 @@
+---
+# tasks file for dockerinstall
+- name: set up docker repository
+  ansible.builtin.command: sudo dnf config-manager --add-repo "{{ docker_official_repo }}"
+
+- name: update system
+  import_role:
+    name: updateall
+
+- name: install docker
+  ansible.builtin.dnf:
+    name: "{{ docker_dependencies }}"
+    state: latest
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes

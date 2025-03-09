@@ -1,0 +1,19 @@
+---
+# tasks file for updateall
+- name: Update Debian-based Systems
+  when: ansible_facts.os_family == "Debian"
+  ansible.builtin.apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Update RHEL-based Systems
+  when: ansible_facts.os_family == "RedHat"
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+
+# - name: Update Alpine-based Systems
+#   when: os_family == 'Alpine'
+#   community.general.apk:
+#     update_cache: yes
+#     upgrade: yes

@@ -1,0 +1,17 @@
+---
+# tasks file for selinux
+- name: disable selinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: disabled
+  when: ansible_selinux.status == "enabled"
+
+- name: enable selinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: enforcing
+  when: ansible_selinux.status == "disabled"
+
+- name: restart host
+  import_role:
+    name: reboot

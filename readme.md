@@ -70,3 +70,9 @@ Aangemaakte rollen
 - updateall: Updates all installed packages on the host(s)
 - minimalinstall: Installs a minimal collection of essential packages
 - dockerinstall: Install docker from the official repo.
+
+# Labo 6
+## Opdracht
+* Maak een overzichtje van alles wat er op je windows (Mac of Linux) PC draait.
+* Maak een ansible procedure om zoveel mogelijk van deze software automatisch te installeren op je Windows 2019 vm.
+* Creeëer indien nodig de nodige packages.

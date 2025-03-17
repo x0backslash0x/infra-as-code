@@ -1,0 +1,8 @@
+- hosts: wintest
+  tasks:
+  - name: chocolatey  # executionpolicy no op "bypass" zetten
+    win_chocolatey:
+      name: chocolatey
+      state: present
+      source: https://community.chocolatey.org/install.ps1
+

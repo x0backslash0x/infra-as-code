@@ -1,5 +1,11 @@
 - name: Labo 5 Ansible & Windows
   hosts: wintest
   tasks:
-  - name: reboot
-    ansible.windows.win_reboot:
+  # - name: reboot
+  #   ansible.windows.win_reboot:
+
+  - name: update Windows
+    win_updates:
+      category_names:
+        - SecurityUpdates
+        - CriticalUpdates

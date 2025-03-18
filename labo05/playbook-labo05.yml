@@ -1,0 +1,5 @@
+- name: Labo 5 Ansible & Windows
+  hosts: wintest
+  tasks:
+  - name: reboot
+    ansible.windows.win_reboot:

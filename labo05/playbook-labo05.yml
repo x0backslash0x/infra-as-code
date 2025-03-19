@@ -8,14 +8,23 @@
   #       - SecurityUpdates
   #       - CriticalUpdates
 
-  - name: change hostname
-    ansible.windows.win_hostname:
-      name: "{{ host_name }}"
-    register: res
-  
-  - name: reboot
-    ansible.windows.win_reboot:
-    when: res.reboot_required
+  # - name: change hostname
+  #   ansible.windows.win_hostname:
+  #     name: "{{ host_name }}"
+  #   register: res
+
+  - name: add hosts entry for ansible-controller
+    # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
+    community.windows.win_hosts:
+      action: add
+      state: present
+      canonical_name: ansible-controller
+      ip_address: "{{ ansible_controller }}"
+
+  # - name: reboot
+  #   ansible.windows.win_reboot:
+  #   when: res.reboot_required
 
   vars:
     host_name: "{{ lookup('file', 'hostname') }}"
+    ansible_controller: "50.50.32.128"

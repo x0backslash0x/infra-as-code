@@ -16,3 +16,6 @@
   - name: reboot
     ansible.windows.win_reboot:
     when: res.reboot_required
+
+  vars:
+    host_name: "{{ lookup('file', 'hostname') }}"

@@ -1,9 +1,9 @@
 [wintest]
-"{{ host_ip }}"
+"{{ lookup('file', 'host_ip') }}"
 
 [wintest:vars]
 ansible_user=Administrator
-ansible_password="{{ host_passwd }}"
+ansible_password="{{ lookup('file', 'passwd') }}"
 ansible_connection=winrm
 ansible_winrm_transport=credssp
 ansible_port=5986

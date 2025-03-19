@@ -70,3 +70,12 @@ Aangemaakte rollen
 - updateall: Updates all installed packages on the host(s)
 - minimalinstall: Installs a minimal collection of essential packages
 - dockerinstall: Install docker from the official repo.
+
+# Labo 5: Ansible & Windows
+## Opdracht
+* Zet je windows machine klaar dat je hem op basis van WINRM kan configureren met ansible.
+* Schrijf een basis playbook uit waarin je minstens 10 modules voor iets nuttigs gebruikt ( 2 van de modules moeten nieuw zijn, modules die we nog niet gezien hebben).
+
+## Rollen
+* [updaten](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
+* [herstarten](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)

@@ -13,13 +13,29 @@
   #     name: "{{ host_name }}"
   #   register: res
 
-  - name: add hosts entry for ansible-controller
-    # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
-    community.windows.win_hosts:
-      action: add
-      state: present
-      canonical_name: ansible-controller
-      ip_address: "{{ ansible_controller }}"
+  # - name: add hosts entry for ansible-controller
+  #   # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
+  #   community.windows.win_hosts:
+  #     action: add
+  #     state: present
+  #     canonical_name: ansible-controller
+  #     ip_address: "{{ ansible_controller }}"
+
+    # - name: disable enable windows firewall
+    #   community.windows.win_firewall:
+    #     profiles:
+    #       - "Domain"
+    #       - "Private"
+    #       - "Public"
+    #     state: "disabled"
+
+    - name: enable enable windows firewall
+      community.windows.win_firewall:
+        profiles:
+          - "Domain"
+          - "Private"
+          - "Public"
+        state: "enabled"
 
   # - name: reboot
   #   ansible.windows.win_reboot:

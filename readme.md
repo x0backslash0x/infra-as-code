@@ -77,8 +77,10 @@ Aangemaakte rollen
 * Schrijf een basis playbook uit waarin je minstens 10 modules voor iets nuttigs gebruikt ( 2 van de modules moeten nieuw zijn, modules die we nog niet gezien hebben).
 
 ## Modules
+Voor sommige windows modules is er ook een `ansible.windows` tegenhanger. maar die werd om de een of andere reden niet erkend door ansible
+
 1. [ansible.windows.win_updates](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
 2. [ansible.windows.win_reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
 3. [ansible.windows.win_hostname](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hostname_module.html)
-4. [community.windows.win_hosts](https://docs.ansible.com/ansible/latest/collections/community/windows/win_hosts_module.html)</br>
-Er is ook een `ansible.windows` tegenhanger van deze module maar die werd om de een of andere reden niet erkend door ansible
+4. [community.windows.win_hosts](https://docs.ansible.com/ansible/latest/collections/community/windows/win_hosts_module.html)
+5. [community.windows.win_firewall](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_firewall_module.html)

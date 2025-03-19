@@ -2,11 +2,17 @@
   hosts: wintest
   gather_facts: False
   tasks:
-  # - name: reboot
-  #   ansible.windows.win_reboot:
+  # - name: update Windows
+  #   win_updates:
+  #     category_names:
+  #       - SecurityUpdates
+  #       - CriticalUpdates
 
-  - name: update Windows
-    win_updates:
-      category_names:
-        - SecurityUpdates
-        - CriticalUpdates
+  - name: change hostname
+    ansible.windows.win_hostname:
+      name: "{{ host_name }}"
+    register: res
+  
+  - name: reboot
+    ansible.windows.win_reboot:
+    when: res.reboot_required

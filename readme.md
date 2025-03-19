@@ -77,6 +77,6 @@ Aangemaakte rollen
 * Schrijf een basis playbook uit waarin je minstens 10 modules voor iets nuttigs gebruikt ( 2 van de modules moeten nieuw zijn, modules die we nog niet gezien hebben).
 
 ## Modules
-* [win_updates](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
-* [win_reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
-* [win_hostname](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hostname_module.html)
+1. [win_updates](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
+2. [win_reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+3. [win_hostname](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hostname_module.html)

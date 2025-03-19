@@ -76,7 +76,7 @@ Aangemaakte rollen
 * Zet je windows machine klaar dat je hem op basis van WINRM kan configureren met ansible.
 * Schrijf een basis playbook uit waarin je minstens 10 modules voor iets nuttigs gebruikt ( 2 van de modules moeten nieuw zijn, modules die we nog niet gezien hebben).
 
-## Taken/Rollen
-* [updaten](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
-* [herstarten](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
-* [hostname](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hostname_module.html)
+## Modules
+* [win_updates](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
+* [win_reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
+* [win_hostname](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_hostname_module.html)

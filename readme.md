@@ -86,3 +86,4 @@ Voor sommige windows modules is er ook een `ansible.windows` tegenhanger. maar d
 5. [community.windows.win_firewall](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_firewall_module.html)
 6. [ansible.windows.win_service](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_service_module.html)
 7. [community.windows.win_security_policy](https://docs.ansible.com/ansible/latest/collections/community/windows/win_security_policy_module.html)
+8. [ansible.windows.win_optional_feature](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_optional_feature_module.html)

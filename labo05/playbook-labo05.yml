@@ -21,21 +21,26 @@
   #     canonical_name: ansible-controller
   #     ip_address: "{{ ansible_controller }}"
 
-    # - name: disable enable windows firewall
-    #   community.windows.win_firewall:
-    #     profiles:
-    #       - "Domain"
-    #       - "Private"
-    #       - "Public"
-    #     state: "disabled"
+  # - name: disable enable windows firewall
+  #   community.windows.win_firewall:
+  #     profiles:
+  #       - "Domain"
+  #       - "Private"
+  #       - "Public"
+  #     state: "disabled"
 
-    - name: enable enable windows firewall
-      community.windows.win_firewall:
-        profiles:
-          - "Domain"
-          - "Private"
-          - "Public"
-        state: "enabled"
+  # - name: enable enable windows firewall
+  #   community.windows.win_firewall:
+  #     profiles:
+  #       - "Domain"
+  #       - "Private"
+  #       - "Public"
+  #     state: "enabled"
+
+  - name: remove a service
+    ansible.windows.win_service:
+      name: spooler
+      state: absent
 
   # - name: reboot
   #   ansible.windows.win_reboot:

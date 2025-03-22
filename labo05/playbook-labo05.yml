@@ -37,20 +37,26 @@
   #       - "Public"
   #     state: "enabled"
 
-  - name: remove service - print spooler
-    ansible.windows.win_service:
-      name: spooler
-      state: absent
+  # - name: remove service - print spooler
+  #   ansible.windows.win_service:
+  #     name: spooler
+  #     state: absent
 
-  - name: remove service - Printer Extensions and Notifications
-    ansible.windows.win_service:
-      name: PrintNotify
-      state: absent
+  # - name: remove service - Printer Extensions and Notifications
+  #   ansible.windows.win_service:
+  #     name: PrintNotify
+  #     state: absent
 
-  - name: remove service - Theme
-    ansible.windows.win_service:
-      name: Theme
-      state: absent
+  # - name: remove service - Theme
+  #   ansible.windows.win_service:
+  #     name: Theme
+  #     state: absent
+
+  - name: Local Security Policy - set minimum password length
+    community.windows.win_security_policy:
+      section: "System Access"
+      key: "MinimumPasswordLength"
+      value: 12
 
   # - name: reboot
   #   ansible.windows.win_reboot:

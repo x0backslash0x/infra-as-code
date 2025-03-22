@@ -58,16 +58,24 @@
   #     key: "MinimumPasswordLength"
   #     value: 12
 
-  - name: remove Windows Feature - Internet Explorer 11
-    ansible.windows.win_optional_feature:
-      name: "Internet-Explorer-Optional-amd64"
-      state: "absent"
-    register: feat
+  # - name: remove Windows Feature - Internet Explorer 11
+  #   ansible.windows.win_optional_feature:
+  #     name: "Internet-Explorer-Optional-amd64"
+  #     state: "absent"
+  #   register: feat
 
-  - name: reboot
-    ansible.windows.win_reboot:
-    # when: res.reboot_required
-    when: feat.reboot_required
+  # - name: reboot
+  #   ansible.windows.win_reboot:
+  #   # when: res.reboot_required
+  #   when: feat.reboot_required
+
+  - name: set screen timeout to 0
+    ansible.windows.win_command:
+      cmd: powercfg /change monitor-timeout-ac 0
+
+  - name: set standby timeout to 0
+    ansible.windows.win_command:
+      cmd: powercfg /change standby-timeout-ac 0
 
   vars:
     host_name: "{{ lookup('file', 'hostname') }}"

@@ -37,9 +37,19 @@
   #       - "Public"
   #     state: "enabled"
 
-  - name: remove a service
+  - name: remove service - print spooler
     ansible.windows.win_service:
       name: spooler
+      state: absent
+
+  - name: remove service - Printer Extensions and Notifications
+    ansible.windows.win_service:
+      name: PrintNotify
+      state: absent
+
+  - name: remove service - Theme
+    ansible.windows.win_service:
+      name: Theme
       state: absent
 
   # - name: reboot

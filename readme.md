@@ -78,6 +78,7 @@ Aangemaakte rollen
 
 ## Modules
 Voor sommige windows modules is er ook een `ansible.windows` tegenhanger. maar die werd om de een of andere reden niet erkend door ansible
+`ERROR! couldn't resolve module/action`
 
 1. [ansible.windows.win_updates](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_updates_module.html)
 2. [ansible.windows.win_reboot](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_reboot_module.html)
@@ -88,3 +89,4 @@ Voor sommige windows modules is er ook een `ansible.windows` tegenhanger. maar d
 7. [community.windows.win_security_policy](https://docs.ansible.com/ansible/latest/collections/community/windows/win_security_policy_module.html)
 8. [ansible.windows.win_optional_feature](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_optional_feature_module.html)
 9. [ansible.windows.win_command](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_command_module.html#ansible-collections-ansible-windows-win-command-module)
+10. [community.windows.wim_timezone](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_timezone_module.html#ansible-collections-ansible-windows-win-timezone-module)

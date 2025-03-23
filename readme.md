@@ -90,3 +90,9 @@ Voor sommige windows modules is er ook een `ansible.windows` tegenhanger. maar d
 8. [ansible.windows.win_optional_feature](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_optional_feature_module.html)
 9. [ansible.windows.win_command](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_command_module.html#ansible-collections-ansible-windows-win-command-module)
 10. [community.windows.wim_timezone](https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_timezone_module.html#ansible-collections-ansible-windows-win-timezone-module)
+
+De playbook en hosts file maken gebruik van volgende variabelen
+* hostname (file, hostname)
+* host_ip bestand - ip van hosts
+* passwd bestand - wachtwoord voor host
+* ansible_controller

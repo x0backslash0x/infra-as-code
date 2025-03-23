@@ -2,34 +2,34 @@
   hosts: wintest
   gather_facts: False
   tasks:
-  # - name: update Windows
-  #   win_updates:
-  #     category_names:
-  #       - SecurityUpdates
-  #       - CriticalUpdates
+  - name: update Windows
+    win_updates:
+      category_names:
+        - SecurityUpdates
+        - CriticalUpdates
 
-  # - name: change hostname
-  #   ansible.windows.win_hostname:
-  #     name: "{{ host_name }}"
-  #   register: res
+  - name: change hostname
+    ansible.windows.win_hostname:
+      name: "{{ host_name }}"
+    register: res
 
-  # - name: add hosts entry for ansible-controller
-  #   # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
-  #   community.windows.win_hosts:
-  #     action: add
-  #     state: present
-  #     canonical_name: ansible-controller
-  #     ip_address: "{{ ansible_controller }}"
+  - name: add hosts entry for ansible-controller
+    # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
+    community.windows.win_hosts:
+      action: add
+      state: present
+      canonical_name: ansible-controller
+      ip_address: "{{ ansible_controller }}"
 
-  # - name: disable enable windows firewall
-  #   community.windows.win_firewall:
-  #     profiles:
-  #       - "Domain"
-  #       - "Private"
-  #       - "Public"
-  #     state: "disabled"
+  - name: disable windows firewall
+    community.windows.win_firewall:
+      profiles:
+        - "Domain"
+        - "Private"
+        - "Public"
+      state: "disabled"
 
-  # - name: enable enable windows firewall
+  # - name: enable windows firewall
   #   community.windows.win_firewall:
   #     profiles:
   #       - "Domain"
@@ -37,50 +37,51 @@
   #       - "Public"
   #     state: "enabled"
 
-  # - name: remove service - print spooler
-  #   ansible.windows.win_service:
-  #     name: spooler
-  #     state: absent
+  - name: remove service - print spooler
+    ansible.windows.win_service:
+      name: spooler
+      state: absent
 
-  # - name: remove service - Printer Extensions and Notifications
-  #   ansible.windows.win_service:
-  #     name: PrintNotify
-  #     state: absent
+  - name: remove service - Printer Extensions and Notifications
+    ansible.windows.win_service:
+      name: PrintNotify
+      state: absent
 
-  # - name: remove service - Theme
-  #   ansible.windows.win_service:
-  #     name: Theme
-  #     state: absent
+  - name: remove service - Theme
+    ansible.windows.win_service:
+      name: Theme
+      state: absent
 
-  # - name: Local Security Policy - set minimum password length
-  #   community.windows.win_security_policy:
-  #     section: "System Access"
-  #     key: "MinimumPasswordLength"
-  #     value: 12
+  - name: Local Security Policy - set minimum password length
+    community.windows.win_security_policy:
+      section: "System Access"
+      key: "MinimumPasswordLength"
+      value: 12
 
-  # - name: remove Windows Feature - Internet Explorer 11
-  #   ansible.windows.win_optional_feature:
-  #     name: "Internet-Explorer-Optional-amd64"
-  #     state: "absent"
-  #   register: feat
+  - name: remove Windows Feature - Internet Explorer 11
+    ansible.windows.win_optional_feature:
+      name: "Internet-Explorer-Optional-amd64"
+      state: "absent"
+    register: feat
 
-  # - name: reboot
-  #   ansible.windows.win_reboot:
-  #   # when: res.reboot_required
-  #   when: feat.reboot_required
+  - name: set screen timeout to 0
+    ansible.windows.win_command:
+      cmd: powercfg /change monitor-timeout-ac 0
 
-  # - name: set screen timeout to 0
-  #   ansible.windows.win_command:
-  #     cmd: powercfg /change monitor-timeout-ac 0
-
-  # - name: set standby timeout to 0
-  #   ansible.windows.win_command:
-  #     cmd: powercfg /change standby-timeout-ac 0
+  - name: set standby timeout to 0
+    ansible.windows.win_command:
+      cmd: powercfg /change standby-timeout-ac 0
 
   - name: set timezone to Romance Standard time (GMT +1)
     # ansible.windows.win_timezone:  # ERROR! couldn't resolve module/action
     community.windows.win_timezone:
       timezone: Romance Standard Time
+
+  - name: reboot
+    ansible.windows.win_reboot:
+    # when: res.reboot_required
+    # when: feat.reboot_required
+    when: feat.reboot_required or res.reboot.required
 
   vars:
     host_name: "{{ lookup('file', 'hostname') }}"

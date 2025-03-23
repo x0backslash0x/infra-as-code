@@ -1,0 +1,4 @@
+---
+# tasks file for rwin_reboot
+  - name: reboot
+    ansible.windows.win_reboot:

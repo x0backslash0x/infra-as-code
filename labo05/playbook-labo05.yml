@@ -2,6 +2,7 @@
   hosts: wintest
   gather_facts: False
   roles:
+    - { role: rwin_hostname, host_name: "{{ hostname }}" }
     - rwin_reboot
   
   # tasks:
@@ -87,5 +88,5 @@
   #   when: feat.reboot_required or res.reboot.required
 
   vars:
-    host_name: "{{ lookup('file', 'hostname') }}"
+    hostname: "{{ lookup('file', 'hostname') }}"
     ansible_controller: "50.50.32.128"

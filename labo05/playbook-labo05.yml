@@ -3,7 +3,6 @@
   gather_facts: False
   roles:
     - { role: rwin_hostname, host_name: "{{ hostname }}" }
-    - rwin_reboot
   
   # tasks:
   # - name: update Windows
@@ -11,11 +10,6 @@
   #     category_names:
   #       - SecurityUpdates
   #       - CriticalUpdates
-
-  # - name: change hostname
-  #   ansible.windows.win_hostname:
-  #     name: "{{ host_name }}"
-  #   register: res
 
   # - name: add hosts entry for ansible-controller
   #   # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
@@ -80,12 +74,6 @@
   # #   # ansible.windows.win_timezone:  # ERROR! couldn't resolve module/action
   # #   community.windows.win_timezone:
   # #     timezone: Romance Standard Time
-
-  # - name: reboot
-  #   ansible.windows.win_reboot:
-  #   # when: res.reboot_required
-  #   # when: feat.reboot_required
-  #   when: feat.reboot_required or res.reboot.required
 
   vars:
     hostname: "{{ lookup('file', 'hostname') }}"

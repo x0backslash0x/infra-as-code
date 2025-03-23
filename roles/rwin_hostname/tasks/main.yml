@@ -3,3 +3,9 @@
 - name: change hostname
   ansible.windows.win_hostname:
     name: "{{ host_name }}"
+  register: host
+  
+- name: reboot
+  ansible.builtin.include_role:
+    name: rwin_reboot
+  when: host.reboot_required

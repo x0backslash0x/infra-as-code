@@ -2,15 +2,10 @@
   hosts: wintest
   gather_facts: False
   roles:
-    - { role: rwin_hostname, host_name: "{{ hostname }}" }
+    # - { role: rwin_hostname, host_name: "{{ hostname }}" }
+    - role: rwin_update
   
   # tasks:
-  # - name: update Windows
-  #   win_updates:
-  #     category_names:
-  #       - SecurityUpdates
-  #       - CriticalUpdates
-
   # - name: add hosts entry for ansible-controller
   #   # ansible.windows.win_hosts:  # ERROR! couldn't resolve module/action 'ansible.windows.win_hosts' 
   #   community.windows.win_hosts:

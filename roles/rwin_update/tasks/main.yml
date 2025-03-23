@@ -1,0 +1,14 @@
+---
+# tasks file for rwin_update
+- name: update Windows
+  win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+  register: update
+
+- name: reboot
+  ansible.builtin.include_role:
+    name: rwin_reboot
+  when: update.reboot_required
+

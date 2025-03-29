@@ -21,6 +21,7 @@ Role Variables
 
 * docker_official_repo: url to the official docker repository for RHEL
 * docker_dependencies: list of packages to install alongside docker
+* user: user to add to the docker group
 
 Dependencies
 ------------
@@ -35,7 +36,7 @@ Example Playbook
       gather_facts: True
       become: yes
       roles:
-         - dockerinstall
+         - { role: dockerinstall, user: <user> }
 
 License
 -------

@@ -1,6 +1,6 @@
 ---
 # tasks file for dockerinstall
-- name: set up docker repository
+- name: set up docker repository  # Red Hat based
   ansible.builtin.command: sudo dnf config-manager --add-repo "{{ docker_official_repo }}"
 
 - name: update system
@@ -17,3 +17,9 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Grant permission to run docker command
+  ansible.builtin.user:
+    append: true
+    groups: docker
+    name: "{{ user }}"

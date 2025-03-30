@@ -87,3 +87,4 @@ Packages
 * [python](https://community.chocolatey.org/packages/python/3.13.2)
 * [notepad++](https://community.chocolatey.org/packages/notepadplusplus.install)
 * [openssl](https://community.chocolatey.org/packages/OpenSSL.Light)
+* [VLC media player](https://community.chocolatey.org/packages/vlc)

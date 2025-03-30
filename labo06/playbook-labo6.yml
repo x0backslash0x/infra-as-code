@@ -37,6 +37,12 @@
       version: '136.0.4'
       state: present
 
+  - name: Install Okular
+    win_chocolatey:
+      name: okular
+      version: '24.12.0'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

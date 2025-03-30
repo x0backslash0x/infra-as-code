@@ -18,3 +18,15 @@
       name: dropbox
       version: '220.4.4126'
       state: present
+
+  - name: Install Greenshot
+    win_chocolatey:
+      name: greenshot
+      version: '1.2.10.6'
+      state: present
+
+  # - name: Install
+  #   win_chocolatey:
+  #     name: 
+  #     version: ''
+  #     state: present

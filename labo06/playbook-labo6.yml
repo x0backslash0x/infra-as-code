@@ -25,6 +25,12 @@
       version: '1.2.10.6'
       state: present
 
+  - name: Install Irfanview
+    win_chocolatey:
+      name: irfanview
+      version: '4.70.0'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

@@ -121,6 +121,12 @@
       version: '1.0.9187'
       state: present
 
+  - name: Install vscode
+    win_chocolatey:
+      name: vscode
+      version: '1.98.2'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

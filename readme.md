@@ -97,3 +97,4 @@ Packages
 * [Toggl Track](https://community.chocolatey.org/packages/toggl)
 * [Git](https://community.chocolatey.org/packages/git)
 * [Discord](https://community.chocolatey.org/packages/discord)
+* [Microsoft Visual Studio Code](https://community.chocolatey.org/packages/vscode)

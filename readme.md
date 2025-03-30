@@ -96,3 +96,4 @@ Packages
 * [OBS Studio](https://community.chocolatey.org/packages/obs-studio)
 * [Toggl Track](https://community.chocolatey.org/packages/toggl)
 * [Git](https://community.chocolatey.org/packages/git)
+* [Discord](https://community.chocolatey.org/packages/discord)

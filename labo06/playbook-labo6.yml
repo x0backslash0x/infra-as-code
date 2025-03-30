@@ -115,6 +115,12 @@
       version: '2.49.0'
       state: present
 
+  - name: Install Discord
+    win_chocolatey:
+      name: discord
+      version: '1.0.9187'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

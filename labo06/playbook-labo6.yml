@@ -31,6 +31,12 @@
       version: '4.70.0'
       state: present
 
+  - name: Install firefox
+    win_chocolatey:
+      name: firefox
+      version: '136.0.4'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

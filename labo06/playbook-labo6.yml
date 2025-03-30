@@ -109,6 +109,12 @@
       version: '7.5.454'
       state: present
 
+  - name: Install Git
+    win_chocolatey:
+      name: git
+      version: '2.49.0'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

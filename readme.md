@@ -95,3 +95,4 @@ Packages
 * [node.js](https://community.chocolatey.org/packages/nodejs)
 * [OBS Studio](https://community.chocolatey.org/packages/obs-studio)
 * [Toggl Track](https://community.chocolatey.org/packages/toggl)
+* [Git](https://community.chocolatey.org/packages/git)

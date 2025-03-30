@@ -91,6 +91,12 @@
       version: '1.39.1'
       state: present
 
+  - name: Install Node.js  # requires restart to be available from system PATH
+    win_chocolatey:
+      name: nodejs
+      version: '23.10.0'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

@@ -92,3 +92,4 @@ Packages
 * [Belgium e-ID Middleware](https://community.chocolatey.org/packages/eid-belgium)
 * [Belgium e-ID Viewer](https://community.chocolatey.org/packages/eid-belgium-viewer)
 * [Bruno](https://community.chocolatey.org/packages/bruno)
+* [node.js](https://community.chocolatey.org/packages/nodejs)

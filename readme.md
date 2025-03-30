@@ -94,3 +94,4 @@ Packages
 * [Bruno](https://community.chocolatey.org/packages/bruno)
 * [node.js](https://community.chocolatey.org/packages/nodejs)
 * [OBS Studio](https://community.chocolatey.org/packages/obs-studio)
+* [Toggl Track](https://community.chocolatey.org/packages/toggl)

@@ -103,6 +103,12 @@
       version: '31.0.3'
       state: present
 
+  - name: Install Toggle Track
+    win_chocolatey:
+      name: toggl
+      version: '7.5.454'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

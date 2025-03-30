@@ -73,6 +73,18 @@
       version: '8.0.441'
       state: present
 
+  - name: Install eid-belgium-middleware
+    win_chocolatey:
+      name: eid-belgium
+      version: '5.0.17.5498'  # verouderde versie. Werkt niet meer voor aanmelden met e-ID. Nieuwste versie vereist
+      state: present
+
+  - name: Install eid-belgium-viewer
+    win_chocolatey:
+      name: eid-belgium-viewer
+      version: '5.1.2.5886'  # verouderde versie
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

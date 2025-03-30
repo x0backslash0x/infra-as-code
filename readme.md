@@ -89,3 +89,5 @@ Packages
 * [openssl](https://community.chocolatey.org/packages/OpenSSL.Light)
 * [VLC media player](https://community.chocolatey.org/packages/vlc)
 * [Java Runtime Environment (JRE)](https://community.chocolatey.org/packages/jre8)
+* [Belgium e-ID Middleware](https://community.chocolatey.org/packages/eid-belgium)
+* [Belgium e-ID Viewer](https://community.chocolatey.org/packages/eid-belgium-viewer)

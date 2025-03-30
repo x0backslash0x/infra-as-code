@@ -55,6 +55,12 @@
       version: '8.7.8'
       state: present
 
+  - name: Install OpenSSL
+    win_chocolatey:
+      name: openssl.light
+      version: '3.1.4'  # outdated. Newest version is 3.4.1
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

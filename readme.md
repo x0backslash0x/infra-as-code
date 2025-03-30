@@ -78,5 +78,12 @@ Aangemaakte rollen
 * Creeëer indien nodig de nodige packages.
 
 Packages
-* 7zip
-* dropbox
+* [7zip](https://community.chocolatey.org/packages/7zip#ansible)
+* [dropboxç](https://community.chocolatey.org/packages/dropbox/220.4.4126)
+* [greenshot](https://community.chocolatey.org/packages/greenshot)
+* [irfanview](https://community.chocolatey.org/packages/IrfanView)
+* [firefox](https://community.chocolatey.org/packages/Firefox)
+* [okular](https://community.chocolatey.org/packages/okular)
+* [python](https://community.chocolatey.org/packages/python/3.13.2)
+* [notepad++](https://community.chocolatey.org/packages/notepadplusplus.install)
+* [openssl](https://community.chocolatey.org/packages/OpenSSL.Light)

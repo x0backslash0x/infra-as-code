@@ -1,4 +1,5 @@
 - hosts: wintest
+  gather_facts: false
   tasks:
   - name: chocolatey  # executionpolicy no op "bypass" zetten
     win_chocolatey:
@@ -6,3 +7,8 @@
       state: present
       source: https://community.chocolatey.org/install.ps1
 
+  - name: install 7zip
+    win_chocolatey:
+      name: 7zip
+      version: '24.9.0'
+      state: present

@@ -76,3 +76,6 @@ Aangemaakte rollen
 * Maak een overzichtje van alles wat er op je windows (Mac of Linux) PC draait.
 * Maak een ansible procedure om zoveel mogelijk van deze software automatisch te installeren op je Windows 2019 vm.
 * Creeëer indien nodig de nodige packages.
+
+Packages
+* 7zip

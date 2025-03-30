@@ -88,3 +88,4 @@ Packages
 * [notepad++](https://community.chocolatey.org/packages/notepadplusplus.install)
 * [openssl](https://community.chocolatey.org/packages/OpenSSL.Light)
 * [VLC media player](https://community.chocolatey.org/packages/vlc)
+* [Java Runtime Environment (JRE)](https://community.chocolatey.org/packages/jre8)

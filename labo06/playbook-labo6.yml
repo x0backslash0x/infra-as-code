@@ -67,6 +67,12 @@
       version: '3.0.21'
       state: present
 
+  - name: Install Java JRE
+    win_chocolatey:
+      name: jre8
+      version: '8.0.441'
+      state: present
+
   # - name: Install
   #   win_chocolatey:
   #     name: 

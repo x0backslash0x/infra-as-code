@@ -52,3 +52,7 @@
     append: true
     groups: docker
     name: "{{ user }}"
+
+- name: reboot
+  import_role:
+    name: reboot

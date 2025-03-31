@@ -1,0 +1,8 @@
+- name: Labo07
+  hosts: host
+  gather_facts: true
+  become: true
+  roles:
+    - { role: dockerinstall, user: "{{ user }}" }
+
+# ansible-playbook playbook-labo07.yml -K -e ip=<host ip> -e user=<host user>

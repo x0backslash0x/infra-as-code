@@ -96,3 +96,31 @@ De playbook en hosts file maken gebruik van volgende variabelen
 * host_ip bestand - ip van hosts
 * passwd bestand - wachtwoord voor host
 * ansible_controller
+
+# Labo 6
+## Opdracht
+* Maak een overzichtje van alles wat er op je windows (Mac of Linux) PC draait.
+* Maak een ansible procedure om zoveel mogelijk van deze software automatisch te installeren op je Windows 2019 vm.
+* Creeëer indien nodig de nodige packages.
+
+## Packages
+* [7zip](https://community.chocolatey.org/packages/7zip#ansible)
+* [dropboxç](https://community.chocolatey.org/packages/dropbox/220.4.4126)
+* [greenshot](https://community.chocolatey.org/packages/greenshot)
+* [irfanview](https://community.chocolatey.org/packages/IrfanView)
+* [firefox](https://community.chocolatey.org/packages/Firefox)
+* [okular](https://community.chocolatey.org/packages/okular)
+* [python](https://community.chocolatey.org/packages/python/3.13.2)
+* [notepad++](https://community.chocolatey.org/packages/notepadplusplus.install)
+* [openssl](https://community.chocolatey.org/packages/OpenSSL.Light)
+* [VLC media player](https://community.chocolatey.org/packages/vlc)
+* [Java Runtime Environment (JRE)](https://community.chocolatey.org/packages/jre8)
+* [Belgium e-ID Middleware](https://community.chocolatey.org/packages/eid-belgium)
+* [Belgium e-ID Viewer](https://community.chocolatey.org/packages/eid-belgium-viewer)
+* [Bruno](https://community.chocolatey.org/packages/bruno)
+* [node.js](https://community.chocolatey.org/packages/nodejs)
+* [OBS Studio](https://community.chocolatey.org/packages/obs-studio)
+* [Toggl Track](https://community.chocolatey.org/packages/toggl)
+* [Git](https://community.chocolatey.org/packages/git)
+* [Discord](https://community.chocolatey.org/packages/discord)
+* [Microsoft Visual Studio Code](https://community.chocolatey.org/packages/vscode)

@@ -1,0 +1,181 @@
+- hosts: wintest
+  gather_facts: false
+  tasks:
+  - name: chocolatey  # executionpolicy no op "bypass" zetten
+    win_chocolatey:
+      name: chocolatey
+      state: present
+      source: https://community.chocolatey.org/install.ps1
+
+  - name: install 7zip
+    win_chocolatey:
+      name: 7zip
+      version: '24.9.0'
+      state: present
+    tags: 7zip
+
+  - name: Install Dropbox
+    win_chocolatey:
+      name: dropbox
+      version: '220.4.4126'
+      state: present
+    tags: dropbox
+
+  - name: Install Greenshot
+    win_chocolatey:
+      name: greenshot
+      version: '1.2.10.6'
+      state: present
+    tags:
+    - greenshot
+    - img
+
+  - name: Install Irfanview
+    win_chocolatey:
+      name: irfanview
+      version: '4.70.0'
+      state: present
+    tags:
+    - irfanview
+    - img
+
+  - name: Install firefox
+    win_chocolatey:
+      name: firefox
+      version: '136.0.4'
+      state: present
+    tags: firefox
+
+  - name: Install Okular
+    win_chocolatey:
+      name: okular
+      version: '24.12.0'
+      state: present
+    tags: pdf
+
+  - name: Install python
+    win_chocolatey:
+      name: python
+      version: '3.13.2'
+      state: present
+    tags:
+    - python
+    - devel
+
+  - name: Install Notepad++
+    win_chocolatey:
+      name: notepadplusplus.install
+      version: '8.7.8'
+      state: present
+    tags:
+    - notepad++
+    - devel
+
+  - name: Install OpenSSL
+    win_chocolatey:
+      name: openssl.light
+      version: '3.1.4'  # outdated. Newest version is 3.4.1
+      state: present
+    tags:
+    - openssl
+    - security
+    - devel
+
+  - name: Install vlc
+    win_chocolatey:
+      name: vlc
+      version: '3.0.21'
+      state: present
+    tags:
+    - vlc
+    - media
+
+  - name: Install Java JRE
+    win_chocolatey:
+      name: jre8
+      version: '8.0.441'
+      state: present
+    tags:
+    - java
+    - beid
+
+  - name: Install eid-belgium-middleware
+    win_chocolatey:
+      name: eid-belgium
+      version: '5.0.17.5498'  # verouderde versie. Werkt niet meer voor aanmelden met e-ID. Nieuwste versie vereist
+      state: present
+    tags: beid
+
+  - name: Install eid-belgium-viewer
+    win_chocolatey:
+      name: eid-belgium-viewer
+      version: '5.1.2.5886'  # verouderde versie
+      state: present
+    tags: beid
+
+  - name: Install Bruno API tool
+    win_chocolatey:
+      name: bruno
+      version: '1.39.1'
+      state: present
+    tags:
+    - bruno
+    - devel
+
+  - name: Install Node.js  # requires restart to be available from system PATH
+    win_chocolatey:
+      name: nodejs
+      version: '23.10.0'
+      state: present
+    tags:
+    - devel
+    - nodejs
+
+  - name: Install OBS Studio  # verification testing exemption
+    win_chocolatey:
+      name: obs-studio
+      version: '31.0.3'
+      state: present
+    tags:
+    - obs
+    - media
+
+  - name: Install Toggle Track
+    win_chocolatey:
+      name: toggl
+      version: '7.5.454'
+      state: present
+    tags:
+    - track
+
+  - name: Install Git
+    win_chocolatey:
+      name: git
+      version: '2.49.0'
+      state: present
+    tags:
+    - devel
+    - git
+
+  - name: Install Discord
+    win_chocolatey:
+      name: discord
+      version: '1.0.9187'
+      state: present
+    tags:
+    - discord
+
+  - name: Install vscode
+    win_chocolatey:
+      name: vscode
+      version: '1.98.2'
+      state: present
+    tags:
+    - devel
+    - vscode
+
+  # - name: Install
+  #   win_chocolatey:
+  #     name: 
+  #     version: ''
+  #     state: present

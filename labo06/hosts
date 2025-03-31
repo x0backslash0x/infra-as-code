@@ -1,0 +1,10 @@
+[wintest]
+"{{ ip }}"
+
+[wintest:vars]
+ansible_user=Administrator
+ansible_password="{{ lookup('file', 'passwd')  }}"
+ansible_connection=winrm
+ansible_winrm_transport=credssp
+ansible_port=5986
+ansible_winrm_server_cert_validation=ignore

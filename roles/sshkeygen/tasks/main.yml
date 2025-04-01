@@ -1,0 +1,6 @@
+---
+# tasks file for sshkeygen
+- name: generate SSH RSA keypair  # as logged-in user (ansible_user)
+  path: ".ssh/id_rsa"
+  type: rsa
+  state: present

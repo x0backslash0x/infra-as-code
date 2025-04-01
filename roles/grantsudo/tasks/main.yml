@@ -1,0 +1,15 @@
+---
+# tasks file for grantsudo
+- name: grant sudo rights (Debian)
+  ansible.builtin.user:
+    name: "{{ username }}"
+    append: true
+    groups: sudo
+  when: ansible_facts.os_family == "Debian"
+
+- name: grant sudo rights (Red Hat)
+  ansible.builtin.user:
+    name: "{{ username }}"
+    append: true
+    groups: wheel
+  when: ansible_facts.os_family == "RedHat"

@@ -1,19 +1,23 @@
 ---
 # tasks file for createuser
-- name: create user
+- name: create user (Debian)
   ansible.builtin.user:
     name: "{{ username }}"
     password: "{{ userpass }}" # sha-512 hashed value
+    create_home: true
+    shell: /bin/bash
     append: true
     group: sudo
     generate_ssh_key: true
     ssh_key_file: ".ssh/id_rsa"
   when: ansible_facts.os_family == "Debian"
 
-- name: create user
+- name: create user (Red Hat)
   ansible.builtin.user:
     name: "{{ username }}"
     password: "{{ userpass }}" # sha-512 hashed value
+    create_home: true
+    shell: /bin/bash
     append: true
     group: wheel
     generate_ssh_key: true

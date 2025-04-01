@@ -3,11 +3,12 @@
   gather_facts: true
   become: true
   roles:
-    - { role: createuser, username: "{{ user }}", userpass: "{{ userpasswd }}" }
-    # - { role: dockerinstall, user: "{{ user }}" }
+    - { role: createuser, username: "{{ newuser }}", userpass: "{{ userpasswd }}" }
+    - { role: dockerinstall, user: "{{ newuser }}" }
 
   vars:
-    - user: "dokwerker"
-    - userpasswd: "{{ lookup('file', 'host_passwd') }}"
+    - newuser: dokwerker
+    - userpasswd: "{{ lookup('file', 'userpasswd') }}"
 
-# ansible-playbook playbook-labo07.yml -e user=<host user>
+# htpasswd --method=sha-512 <password> > userpasswd
+# ansible-playbook playbook-labo07.yml

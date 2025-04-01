@@ -5,6 +5,17 @@
     name: "{{ username }}"
     password: "{{ userpass }}" # sha-512 hashed value
     append: true
+    group: sudo
+    generate_ssh_key: true
+    ssh_key_file: ".ssh/id_rsa"
+  when: ansible_facts.os_family == "Debian"
+
+- name: create user
+  ansible.builtin.user:
+    name: "{{ username }}"
+    password: "{{ userpass }}" # sha-512 hashed value
+    append: true
     group: wheel
     generate_ssh_key: true
     ssh_key_file: ".ssh/id_rsa"
+  when: ansible_facts.os_family == "RedHat"

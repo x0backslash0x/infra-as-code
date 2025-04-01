@@ -19,7 +19,8 @@ Role Variables
 --------------
 
 - username: name of the user to be created
-- userpass: sha-512 hashed password of the user to be created
+- userpass: sha-512 hashed password of the user to be createdµ
+- ansible_facts.os_family: conditional check for setting group name
 
 Dependencies
 ------------
@@ -29,7 +30,7 @@ Dependencies
 Example Playbook
 ----------------
     - hosts: managed-nodes
-      gather_facts: False
+      gather_facts: True
       become: yes
       roles:
         - { role: createuser, username: "<username>", userpass: "<hash>" }

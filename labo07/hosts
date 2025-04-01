@@ -1,5 +1,6 @@
 [host]
-"{{ ip }}"
+"{{ lookup('file', 'host_ip')  }}"
 
 [host:vars]
-ansible_user=deb
+ansible_user="{{ lookup('file', 'host_user')  }}"
+ansible_become_password="{{ lookup('file', 'host_passwd')  }}"

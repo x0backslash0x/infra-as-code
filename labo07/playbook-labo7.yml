@@ -5,4 +5,4 @@
   roles:
     - { role: dockerinstall, user: "{{ user }}" }
 
-# ansible-playbook playbook-labo07.yml -K -e ip=<host ip> -e user=<host user>
+# ansible-playbook playbook-labo07.yml -e user=<host user>

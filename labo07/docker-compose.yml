@@ -1,0 +1,19 @@
+name: "labo 7"
+services:
+  cms1:
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      - WORDPRESS_DB_HOST=database
+      - WORDPRESS_DB_USER=dbuser
+      - WORDPRESS_DB_PASSWORD=dbpass
+      - WORDPRESS_DB_NAME=wp
+      - WORDPRESS_TABLE_PREFIX=wp
+  database:
+    image: mysql
+    environment:
+       - MYSQL_ROOT_PASSWORD_RANDOM=yes
+       - MYSQL_DATABASE=wp
+       - MYSQL_USER=dbuser
+       - MYSQL_PASSWORD=dbpass

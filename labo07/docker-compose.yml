@@ -10,6 +10,9 @@ services:
       - WORDPRESS_DB_PASSWORD=${db_pass}
       - WORDPRESS_DB_NAME=${db_name}
       - WORDPRESS_TABLE_PREFIX=wp
+    depends_on:
+      database:
+        condition: service_healthy
   database:
     image: mysql
     environment:
@@ -17,3 +20,8 @@ services:
        - MYSQL_DATABASE=${db_name}
        - MYSQL_USER=${db_user}
        - MYSQL_PASSWORD=${db_pass}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"]
+      interval: 2s
+      start_period: 30s

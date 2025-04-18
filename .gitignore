@@ -1,5 +1,3 @@
 *.pub
 facts
 .vscode
-*.env
-!example.env

@@ -2,6 +2,8 @@ name: "labo 7"
 services:
   cms1:
     image: wordpress
+    volumes:
+      - ./wp/:/var/www/html/
     ports:
       - 8080:80
     environment:
@@ -15,6 +17,8 @@ services:
         condition: service_healthy
   database:
     image: mysql
+    volumes:
+      - ./db/:/var/lib/mysql/
     environment:
        - MYSQL_RANDOM_ROOT_PASSWORD=yes
        - MYSQL_DATABASE=${db_name}

@@ -1,20 +1,29 @@
 name: "labo 7"
 services:
+  proxy:
+    image: nginx
+    volumes:
+      - ./default-http.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    # depends_on:
+    #   cms1:
+    #     condition: service_completed_successfully
   cms1:
     image: wordpress
     volumes:
       - ./wp/:/var/www/html/
-    ports:
-      - 8080:80
+    # ports:
+    #   - 8080:80
     environment:
       - WORDPRESS_DB_HOST=database
       - WORDPRESS_DB_USER=${db_user}
       - WORDPRESS_DB_PASSWORD=${db_pass}
       - WORDPRESS_DB_NAME=${db_name}
       - WORDPRESS_TABLE_PREFIX=wp
-    depends_on:
-      database:
-        condition: service_healthy
+    # depends_on:
+    #   database:
+    #     condition: service_healthy
   database:
     image: mysql
     volumes:

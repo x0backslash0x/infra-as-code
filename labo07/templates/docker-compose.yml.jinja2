@@ -38,3 +38,7 @@ services:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"]
       interval: 2s
       start_period: 30s
+  apache:
+    build: ./build/
+    ports:
+      - 8040:80

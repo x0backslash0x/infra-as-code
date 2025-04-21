@@ -13,14 +13,13 @@ services:
     image: wordpress
     volumes:
       - ./wp/:/var/www/html/
-    # ports:
-    #   - 8080:80
     environment:
       - WORDPRESS_DB_HOST=database
       - WORDPRESS_DB_USER=${db_user}
       - WORDPRESS_DB_PASSWORD=${db_pass}
       - WORDPRESS_DB_NAME=${db_name}
       - WORDPRESS_TABLE_PREFIX=wp
+      - WORDPRESS_CONFIG_EXTRA=define('WP_HOME','http://localhost/cms1');define('WP_SITEURL','http://localhost/cms1');
     # depends_on:
     #   database:
     #     condition: service_healthy
@@ -40,5 +39,3 @@ services:
       start_period: 30s
   apache:
     build: ./build/
-    {# ports:
-      - 8040:80 #}

@@ -124,3 +124,25 @@ De playbook en hosts file maken gebruik van volgende variabelen
 * [Git](https://community.chocolatey.org/packages/git)
 * [Discord](https://community.chocolatey.org/packages/discord)
 * [Microsoft Visual Studio Code](https://community.chocolatey.org/packages/vscode)
+
+# Labo 7
+## Opdracht
+playbook maken om een docker opstelling te deployen.
+
+**taken**
+* alle nodige software installeren
+* hostname veranderen: terminal
+* gebruiker aanmaken: dokwerker
+* docker containers opzetten
+    - proxy
+    - cms 1-3
+    - I did it website
+    - portainer
+
+## Modules
+* [ansible.builtin.file]
+* [ansible.builtin.template](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html)
+* [community.docker.docker_compose_v2](https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_v2_module.html)
+
+## Opstelling
+![layout](./info/07_schema-layout.jpg)

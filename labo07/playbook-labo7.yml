@@ -9,53 +9,65 @@
     # gebruiker aanmaken
     - { role: createuser, username: "{{ newuser }}", userpass: "{{ userpasswd }}" }
     - { role: grantsudo, username: "{{ newuser }}" }
+    # hostname veranderen
+    - { role: naam, hostname: "terminal" }
     # docker installeren
     - { role: dockerinstall, user: "{{ newuser }}" }
 
-  # tasks:
-  #   - name: Create project directory
-  #     ansible.builtin.file:
-  #       path: "{{ project_dir }}"
-  #       state: directory
-  #       mode: '0755'
+  tasks:  # docker containers opzetten
+    - name: Create project directory
+      ansible.builtin.file:
+        path: "{{ project_dir }}"
+        state: directory
+        mode: '0755'
+        owner: "{{ newuser }}"
+        group: "{{ newuser }}"
 
-  #   - name: Create directories for volumes
-  #     ansible.builtin.file:
-  #       path: "{{ project_dir }}/{{ item }}"
-  #       state: directory
-  #       mode: '0755'
-  #     with_items:
-  #       - wp
-  #       - db
-  #       - nginx
+    - name: Create directories for volumes
+      ansible.builtin.file:
+        path: "{{ project_dir }}/{{ item }}"
+        state: directory
+        mode: '0755'
+        owner: "{{ newuser }}"
+        group: "{{ newuser }}"
+      with_items:
+        - wp
+        - db
+        - nginx
 
-  #   - name: Create .env file
-  #     ansible.builtin.template:
-  #       src: templates/env.jinja2
-  #       dest: "{{ project_dir }}/.env"
-  #       mode: '0600'
+    - name: Provision .env file
+      ansible.builtin.template:
+        src: templates/env.jinja2
+        dest: "{{ project_dir }}/.env"
+        mode: '0600'
+        owner: "{{ newuser }}"
+        group: "{{ newuser }}"
 
-  #   - name: Create Nginx configuration
-  #     ansible.builtin.template:
-  #       src: templates/default-http.conf.jinja2
-  #       dest: "{{ project_dir }}/nginx/default-http.conf"
-  #       mode: '0644'
+    - name: Provision Nginx configuration
+      ansible.builtin.template:
+        src: templates/default-http.conf.jinja2
+        dest: "{{ project_dir }}/nginx/default-http.conf"
+        mode: '0644'
+        owner: "{{ newuser }}"
+        group: "{{ newuser }}"
 
-  #   - name: Deploy Docker Compose file
-  #     ansible.builtin.template:
-  #       src: templates/docker-compose.yml.jinja2
-  #       dest: "{{ project_dir }}/docker-compose.yml"
-  #       mode: '0644'
+    - name: Provision Docker Compose file
+      ansible.builtin.template:
+        src: templates/docker-compose.yml.jinja2
+        dest: "{{ project_dir }}/docker-compose.yml"
+        mode: '0644'
+        owner: "{{ newuser }}"
+        group: "{{ newuser }}"
 
-  #   - name: Start containers with Docker Compose
-  #     community.docker.docker_compose_v2:
-  #       project_src: "{{ project_dir }}"
-  #       state: present
+    - name: Deploy containers with Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: "{{ project_dir }}"
+        state: present
 
   vars:
     - newuser: dokwerker
     - userpasswd: "{{ lookup('file', 'userpasswd') }}"
-    - project_dir: "~/staging_area"
+    - project_dir: "/home/{{ newuser }}/staging_area"
 
 # htpasswd --method=sha-512 <password> > userpasswd
 # ansible-playbook playbook-labo07.yml

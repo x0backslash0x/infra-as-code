@@ -13,7 +13,8 @@ services:
   cms:
     image: wordpress
     volumes:
-      - ./volumes/wp/:/var/www/html/
+      # - ./volumes/wp/:/var/www/html/
+      - wordpress:/var/www/html/
     environment:
       - WORDPRESS_DB_HOST=database
       - WORDPRESS_DB_USER=${db_user}
@@ -31,7 +32,8 @@ services:
   database:
     image: mysql
     volumes:
-      - ./volumes/db/:/var/lib/mysql/
+      #- ./volumes/db/:/var/lib/mysql/
+      - db:/var/lib/mysql/
     environment:
        - MYSQL_RANDOM_ROOT_PASSWORD=yes
        - MYSQL_DATABASE=${db_name}
@@ -48,6 +50,10 @@ services:
     build: ./build/
     networks:
       - ididit-net
+
+volumes:
+  db:
+  wordpress:
 
 networks:
   proxy-net:

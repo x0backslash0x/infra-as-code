@@ -27,7 +27,7 @@
             owner: "{{ newuser }}"
             group: "{{ newuser }}"
 
-        - name: Create directories for volumes
+        - name: Create subdirectories
           ansible.builtin.file:
             path: "{{ project_dir }}/{{ item }}"
             state: directory
@@ -35,8 +35,6 @@
             owner: "{{ newuser }}"
             group: "{{ newuser }}"
           with_items:
-            - volumes/wp
-            - volumes/db
             - nginx
             - build
 

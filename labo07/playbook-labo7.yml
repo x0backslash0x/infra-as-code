@@ -7,84 +7,90 @@
   become: true
   roles:
     # gebruiker aanmaken
-    - { role: createuser, username: "{{ newuser }}", userpass: "{{ userpasswd }}" }
-    - { role: grantsudo, username: "{{ newuser }}" }
+    - { role: createuser, username: "{{ newuser }}", userpass: "{{ userpasswd }}", tags: user }
+    - { role: grantsudo, username: "{{ newuser }}", tags: user }
     # hostname veranderen
     - { role: naam, hostname: "terminal" }
     # docker installeren
-    - { role: dockerinstall, user: "{{ newuser }}" }
+    - { role: dockerinstall, user: "{{ newuser }}", tags: install }
 
   tasks:  # docker containers opzetten
-    - name: Create project directory
-      ansible.builtin.file:
-        path: "{{ project_dir }}"
-        state: directory
-        mode: '0755'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+    - name: prepare project environment
+      tags:
+        - prep
+      block:
+        - name: Create project directory
+          ansible.builtin.file:
+            path: "{{ project_dir }}"
+            state: directory
+            mode: '0755'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
-    - name: Create directories for volumes
-      ansible.builtin.file:
-        path: "{{ project_dir }}/{{ item }}"
-        state: directory
-        mode: '0755'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
-      with_items:
-        - wp
-        - db
-        - nginx
-        - build
+        - name: Create directories for volumes
+          ansible.builtin.file:
+            path: "{{ project_dir }}/{{ item }}"
+            state: directory
+            mode: '0755'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
+          with_items:
+            - wp
+            - db
+            - nginx
+            - build
 
-    - name: Provision .env file
-      ansible.builtin.template:
-        src: templates/env.jinja2
-        dest: "{{ project_dir }}/.env"
-        mode: '0600'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+        - name: Provision .env file
+          ansible.builtin.template:
+            src: templates/env.jinja2
+            dest: "{{ project_dir }}/.env"
+            mode: '0600'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
-    - name: Provision Nginx configuration 1
-      ansible.builtin.template:
-        src: templates/default-http.conf.jinja2
-        dest: "{{ project_dir }}/nginx/default-http.conf"
-        mode: '0644'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+        - name: Provision Nginx configuration 1
+          ansible.builtin.template:
+            src: templates/default-http.conf.jinja2
+            dest: "{{ project_dir }}/nginx/default-http.conf"
+            mode: '0644'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
-    - name: Provision Nginx configuration 2
-      ansible.builtin.template:
-        src: templates/nginx.conf.jinja2
-        dest: "{{ project_dir }}/nginx/nginx.conf"
-        mode: '0644'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+        - name: Provision Nginx configuration 2
+          ansible.builtin.template:
+            src: templates/nginx.conf.jinja2
+            dest: "{{ project_dir }}/nginx/nginx.conf"
+            mode: '0644'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
-    - name: Provision dockerfile
-      ansible.builtin.template:
-        src: templates/dockerfile.jinja2
-        dest: "{{ project_dir }}/build/Dockerfile"
-        mode: '0644'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+        - name: Provision dockerfile
+          ansible.builtin.template:
+            src: templates/dockerfile.jinja2
+            dest: "{{ project_dir }}/build/Dockerfile"
+            mode: '0644'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
-    - name: Provision I did it web page
-      ansible.builtin.template:
-        src: templates/ididit.html.jinja2
-        dest: "{{ project_dir }}/build/ididit.html"
-        mode: '0644'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+        - name: Provision I did it web page
+          ansible.builtin.template:
+            src: templates/ididit.html.jinja2
+            dest: "{{ project_dir }}/build/ididit.html"
+            mode: '0644'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
-    - name: Provision Docker Compose file
-      ansible.builtin.template:
-        src: templates/docker-compose.yml.jinja2
-        dest: "{{ project_dir }}/docker-compose.yml"
-        mode: '0644'
-        owner: "{{ newuser }}"
-        group: "{{ newuser }}"
+        - name: Provision Docker Compose file
+          ansible.builtin.template:
+            src: templates/docker-compose.yml.jinja2
+            dest: "{{ project_dir }}/docker-compose.yml"
+            mode: '0644'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
 
     - name: Deploy containers with Docker Compose
+      tags:
+        - deploy
       community.docker.docker_compose_v2:
         project_src: "{{ project_dir }}"
         state: present

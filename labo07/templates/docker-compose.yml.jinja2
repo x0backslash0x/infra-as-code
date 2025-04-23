@@ -50,6 +50,17 @@ services:
     build: ./build/
     networks:
       - ididit-net
+  portainer:
+    image: portainer/portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8000:9000
+      - 9000:9000
+    networks:
+      - proxy-net
+      - cms-net
+      - db-net
 
 volumes:
   db:

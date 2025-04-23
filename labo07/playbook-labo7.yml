@@ -35,8 +35,8 @@
             owner: "{{ newuser }}"
             group: "{{ newuser }}"
           with_items:
-            - wp
-            - db
+            - volumes/wp
+            - volumes/db
             - nginx
             - build
 

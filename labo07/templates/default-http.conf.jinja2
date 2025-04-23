@@ -3,25 +3,24 @@ server {
     # listen  [::]:80;
     server_name  localhost;
 
-    #location / {
-    location /cms1/ {
-        # Strip /cms1 from the URI before passing to WordPress
-        rewrite ^/cms1(/.*)$ $1 break;
+    location /cms/ {
+        # Strip /cms from the URI before passing to WordPress
+        rewrite ^/cms(/.*)$ $1 break;
 
         # Proxy configuration
-        proxy_pass http://cms1:80;
+        proxy_pass http://cms;
         proxy_set_header Host $host;                # Pass the original host (localhost)
         proxy_set_header X-Real-IP $remote_addr;    # Forward client IP
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme; # Protocol (http in this case)
 
         # Revert redirects coming from WordPress
-        proxy_redirect / /cms1/;
+        proxy_redirect / /cms/;
     }
 
     # Handle direct access to WordPress admin and install paths
     location ~ ^/(wp-admin|wp-login\.php) {
-        rewrite ^/(.*)$ /cms1/$1 redirect;
+        rewrite ^/(.*)$ /cms/$1 redirect;
     }
 
     location = /ididit {

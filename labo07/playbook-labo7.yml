@@ -91,9 +91,16 @@
     - name: Deploy containers with Docker Compose
       tags:
         - deploy
-      community.docker.docker_compose_v2:
-        project_src: "{{ project_dir }}"
-        state: present
+      block:
+        - name: create external proxy network
+          community.docker.docker_network:
+            name: proxy-net
+            internal: false
+
+        - name: start containers
+          community.docker.docker_compose_v2:
+            project_src: "{{ project_dir }}"
+            state: present
 
   vars:
     - newuser: dokwerker

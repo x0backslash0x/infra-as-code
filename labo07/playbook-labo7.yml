@@ -48,18 +48,10 @@
             owner: "{{ newuser }}"
             group: "{{ newuser }}"
 
-        - name: Provision Nginx configuration 1
+        - name: Provision Nginx configuration
           ansible.builtin.template:
             src: templates/default-http.conf.jinja2
             dest: "{{ project_dir }}/nginx/default-http.conf"
-            mode: '0644'
-            owner: "{{ newuser }}"
-            group: "{{ newuser }}"
-
-        - name: Provision Nginx configuration 2
-          ansible.builtin.template:
-            src: templates/nginx.conf.jinja2
-            dest: "{{ project_dir }}/nginx/nginx.conf"
             mode: '0644'
             owner: "{{ newuser }}"
             group: "{{ newuser }}"

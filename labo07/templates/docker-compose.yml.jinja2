@@ -4,14 +4,13 @@ services:
     image: nginx
     volumes:
       - ./nginx/default-http.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
     networks:
       - proxy-net
       - cms-net
       - ididit-net
-  cms1:
+  cms:
     image: wordpress
     volumes:
       - ./volumes/wp/:/var/www/html/
@@ -25,34 +24,10 @@ services:
     networks:
       - cms-net
       - db-net
-  cms2:
-    image: wordpress
-    volumes:
-      - ./volumes/wp/:/var/www/html/
-    environment:
-      - WORDPRESS_DB_HOST=database
-      - WORDPRESS_DB_USER=${db_user}
-      - WORDPRESS_DB_PASSWORD=${db_pass}
-      - WORDPRESS_DB_NAME=${db_name}
-      - WORDPRESS_TABLE_PREFIX=wp
-      - WORDPRESS_CONFIG_EXTRA=define('WP_HOME','http://localhost/cms');define('WP_SITEURL','http://localhost/cms');
-    networks:
-      - cms-net
-      - db-net
-  cms3:
-    image: wordpress
-    volumes:
-      - ./volumes/wp/:/var/www/html/
-    environment:
-      - WORDPRESS_DB_HOST=database
-      - WORDPRESS_DB_USER=${db_user}
-      - WORDPRESS_DB_PASSWORD=${db_pass}
-      - WORDPRESS_DB_NAME=${db_name}
-      - WORDPRESS_TABLE_PREFIX=wp
-      - WORDPRESS_CONFIG_EXTRA=define('WP_HOME','http://localhost/cms');define('WP_SITEURL','http://localhost/cms');
-    networks:
-      - cms-net
-      - db-net
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: dnsrr
   database:
     image: mysql
     volumes:

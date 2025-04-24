@@ -15,7 +15,15 @@ label memtest
   kernel      kernel/rocky-9.5-x86_64/vmlinuz
   initrd      images/rocky-9.5-x86_64/initrd.img
   inst.stage2 http://repo-server/rocky-9.5-x86_64
-  append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.nompath inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.graphical
+  append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.graphical inst.nompath
+  # replace repo-server with actual IP address
+
+  label rocky9
+  menu label install rocky linux 9.5 (no GUI)
+  kernel kernel/rocky-9.5-x86_64/vmlinuz
+  initrd images/rocky-9.5-x86_64/initrd.img
+  inst.stage2 http://repo-server/rocky-9.5-x86_64
+  append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.textmode inst.nompath inst.text
   # replace repo-server with actual IP address
 
 label localdisk

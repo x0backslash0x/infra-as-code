@@ -5,7 +5,7 @@ default memtest
 
 menu title PXE Boot menu
 
-label memtest
+  label memtest
   menu label Memtest86+
   kernel kernel/memdisk
   initrd iso/mt86plus_7.00_64.iso
@@ -18,6 +18,14 @@ label memtest
   append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.gui inst.nompath
   # replace repo-server with actual IP address
 
+  label rocky9-gui-wipe
+  menu label install rocky linux 9.5 - wipe disk (with GUI)
+  kernel      kernel/rocky-9.5-x86_64/vmlinuz
+  initrd      images/rocky-9.5-x86_64/initrd.img
+  inst.stage2 http://repo-server/rocky-9.5-x86_64
+  append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.gui.wipe inst.nompath
+  # replace repo-server with actual IP address
+
   label rocky9
   menu label install rocky linux 9.5 (no GUI)
   kernel kernel/rocky-9.5-x86_64/vmlinuz
@@ -26,6 +34,15 @@ label memtest
   append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.text inst.nompath inst.text
   # replace repo-server with actual IP address
 
-label localdisk
+  label rocky9-wipe
+  menu label install rocky linux 9.5 - wipe disk (no GUI)
+  kernel kernel/rocky-9.5-x86_64/vmlinuz
+  initrd images/rocky-9.5-x86_64/initrd.img
+  inst.stage2 http://repo-server/rocky-9.5-x86_64
+  append inst.repo=http://repo-server/rocky-9.5-x86_64/ inst.ks=http://repo-server/rocky-9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.text.wipe inst.nompath inst.text
+  # replace repo-server with actual IP address
+
+  label localdisk
   menu label Boot from local disk
   localboot 0
+  

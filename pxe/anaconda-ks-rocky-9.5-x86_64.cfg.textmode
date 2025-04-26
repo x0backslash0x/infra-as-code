@@ -27,9 +27,12 @@ firstboot --enable
 
 # Generated using Blivet version 3.6.0
 ignoredisk --only-use=sda
-autopart
+
 # Partition clearing information
 clearpart --none --initlabel
+
+# select auto partitioning scheme
+autopart
 
 # System timezone
 timezone Europe/Brussels --utc

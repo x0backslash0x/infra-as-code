@@ -1,0 +1,110 @@
+- name: Labo07
+  hosts: host
+  gather_facts: true
+  gather_subset:
+    - "!all"
+    - "os_family"
+  become: true
+  roles:
+    # gebruiker aanmaken
+    - { role: createuser, username: "{{ newuser }}", userpass: "{{ userpasswd }}", tags: user }
+    - { role: grantsudo, username: "{{ newuser }}", tags: user }
+    # hostname veranderen
+    - { role: naam, hostname: "terminal", tags: hostname }
+    # docker installeren
+    - { role: dockerinstall, user: "{{ newuser }}", tags: install }
+
+  tasks:  # docker containers opzetten
+    - name: prepare project environment
+      tags:
+        - prep
+      block:
+        - name: Create project directory
+          ansible.builtin.file:
+            path: "{{ project_dir }}"
+            state: directory
+            mode: '0755'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
+
+        - name: Create static website page
+          ansible.builtin.lineinfile:
+            path: "{{ project_dir }}/ididit.html"
+            create: true
+            state: present
+            line: "<html><head><title>I did it!</title></head><body><h1>I did it!</h1></body></html>"
+            mode: '0755'
+            owner: "{{ newuser }}"
+            group: "{{ newuser }}"
+
+        - name: build static website image
+          community.docker.docker_image_build:
+            name: ididitweb
+            path: "."
+            args:
+              from: "alpine:3.21.3"
+              run: "apk add apache2"
+              copy: "ididit.html /var/www/localhost/htdocs/index.html"
+              expose: 80
+              cmd: "httpd -D FOREGROUND"
+
+    - name: Deploy containers with Docker Compose
+      tags:
+        - deploy
+      block:
+        - name: start wordpress container 1
+          community.docker.docker_container:
+            name: cms1
+            image: wordpress
+            auto_remove: "{{ autoremove }}"
+            recreate: true
+            volumes: vcms1:/var/www/html
+            published_ports: 8081:80
+            env:
+              WORDPRESS_DB_HOST: "database1"
+              WORDPRESS_DB_USER: "{{ mysql_user | string }}"
+              WORDPRESS_DB_PASSWORD: "{{ mysql_pass | string }}"
+              WORDPRESS_DB_NAME: "{{ mysql_db_name | string }}"
+              WORDPRESS_TABLE_PREFIX: "wp"
+
+        - name: start database1 container
+          community.docker.docker_container:
+            name: database1
+            image: mysql
+            auto_remove: "{{ autoremove }}"
+            recreate: true
+            volumes: vdatabase1:/var/lib/mysql
+            # hostname: "database1"
+            env:
+              MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+              MYSQL_DATABASE: "{{ mysql_db_name | string }}"
+              MYSQL_USER: "{{ mysql_user | string }}"
+              MYSQL_PASSWORD: "{{ mysql_pass | string }}"
+
+        - name: start static website
+          community.docker.docker_container:
+            name: ididit
+            image: ididitweb
+            auto_remove: "{{ autoremove }}"
+            recreate: true
+            published_ports: 8080:80
+
+        - name: start portainer
+          community.docker.docker_container:
+            name: portainer
+            image: portainer/portainer-ce
+            auto_remove: "{{ autoremove }}"
+            recreate: true
+            volumes: /var/run/docker.sock:/var/run/docker.sock
+            published_ports: 
+              - 8000:8000
+              - 9000:9000
+
+  vars:
+    - mysql_user: dbuser
+    - mysql_pass: dbpass
+    - mysql_db_name: wp
+    - newuser: dokwerker
+    - autoremove: false
+    - userpasswd: "{{ lookup('file', 'userpasswd') }}"
+    - project_dir: "/home/{{ newuser }}/staging_area"

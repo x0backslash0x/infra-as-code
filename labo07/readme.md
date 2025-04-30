@@ -1,11 +1,12 @@
 # layout
-![layout](../info/07_container-layout-no-proxy.png)
+![layout](../info/07_container-layout.png)
 
 # links
 | container             | link                  |
 |-----------------------|-----------------------|
 | portainer             | http://localhost:9000 |
 | I DID IT              | http://localhost:8080 |
+| reversee proxy        | http://localhost      |
 | wordpress 1           | http://localhost:8081 |
 | wordpress 2           | http://localhost:8082 |
 | wordpress 3           | http://localhost:8083 |

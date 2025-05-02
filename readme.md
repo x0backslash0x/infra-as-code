@@ -146,3 +146,30 @@ playbook maken om een docker opstelling te deployen.
 
 ## Opstelling
 ![layout](./info/07_schema-layout.jpg)
+
+
+# Magnum Opus
+Bestanden staan in magop directory.
+code onder magop branch.
+
+rol ter ondersteuning van dit project: roles/vikunja
+
+## Basic setup
+to quickly setup Vikunja using Docker
+```
+mkdir files db
+chmod 1000 files db
+docker run -p 3456:3456 -v ./files:/app/vikunja/files -v ./db:/db vikunja/vikunja
+```
+
+vikunja is now available via http://localhost:3456
+
+## Proof of concept setup
+basic setup behind a proxy server that handles only secure connections
+
+### self-signed certificaat maken
+```openssl req -newkey rsa:4096 -x509 -sha512 -days 30 -nodes -out localhost.crt -keyout localhost.key```
+
+when using a different port for vikunja, this needs to be manually changed in the default config for nginx
+
+vikunja poc is available via http://<hostname>

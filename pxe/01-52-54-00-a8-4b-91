@@ -1,0 +1,7 @@
+DEFAULT esxi
+NOHALT 1
+
+LABEL esxi
+  KERNEL esxi8.0U1a/mboot.c32
+  APPEND -c esxi8.0U1a/boot.cfg
+  IPAPPEND 2

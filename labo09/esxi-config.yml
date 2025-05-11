@@ -1,14 +1,20 @@
 - name: labo 9
   hosts: localhost
   gather_facts: false
+  vars:
+    esxi_host: "192.168.12.15"
+    esxi_user: "root"
+    esxi_pass: "ESXi123"
+    local_user: "admin"
+    local_pass: "secretpass-1234"
 
   tasks:
     - name: add a user to the ESXi host
       community.vmware.vmware_local_user_manager:
         validate_certs: false
-        hostname: "192.168.12.15"
-        username: "root"
-        password: "ESXi123"
-        local_user_name: "admin"
-        local_user_password: "secretpass-1234"
+        hostname: "{{ esxi_host }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        local_user_name: "{{ local_user }}"
+        local_user_password: "{{ local_pass }}"
       delegate_to: localhost

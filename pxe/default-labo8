@@ -1,27 +1,31 @@
-ui vesamenu.c32
-prompt 0
-timeout 100
-default memtest
+UI vesamenu.c32
+PROMPT 0
+TIMEOUT 100
+DEFAULT memtest
 
-menu title PXE Boot menu
+MENU title PXE Boot MENU
 
-  label memtest
-  menu label Memtest86+
-  kernel kernel/memdisk
-  initrd isolinux/memtest.iso
+  LABEL memtest
+    MENU LABEL Memtest86+
+    KERNEL kernel/memdisk
+    INITRD isolinux/memtest.iso
 
-  label rocky9-gui
-    menu label install rocky linux 9.5 (manual)
-    kernel      kernel/rocky9.5-x86_64/vmlinuz
-    initrd      images/rocky9.5-x86_64/initrd.img
+  LABEL rocky9-gui
+    MENU LABEL  install rocky linux 9.5 (manual)
+    KERNEL      kernel/rocky9.5-x86_64/vmlinuz
+    INITRD      images/rocky9.5-x86_64/initrd.img
     inst.stage2 http://repo-server/rocky9.5-x86_64
-    append inst.repo=http://repo-server/rocky9.5-x86_64/ inst.nompath
+    APPEND inst.repo=http://repo-server/rocky9.5-x86_64/ inst.nompath
     # replace repo-server with actual IP address
 
-  label rocky9-gui-auto
-    menu label install rocky linux 9.5 (auto)
-    kernel      kernel/rocky9.5-x86_64/vmlinuz
-    initrd      images/rocky9.5-x86_64/initrd.img
+  LABEL rocky9-gui-auto
+    MENU LABEL  install rocky linux 9.5 (auto)
+    KERNEL      kernel/rocky9.5-x86_64/vmlinuz
+    INITRD      images/rocky9.5-x86_64/initrd.img
     inst.stage2 http://repo-server/rocky9.5-x86_64
-    append inst.repo=http://repo-server/rocky9.5-x86_64/ inst.ks=http://repo-server/rocky9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.gui inst.nompath
+    APPEND inst.repo=http://repo-server/rocky9.5-x86_64/ inst.ks=http://repo-server/rocky9.5-x86_64/ks/anaconda-ks-rocky-9.5-x86_64.cfg.gui inst.nompath
     # replace repo-server with actual IP address
+
+  LABEL localdisk
+    MENU LABEL  Boot from local disk
+    localboot 0

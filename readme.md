@@ -124,3 +124,9 @@ De playbook en hosts file maken gebruik van volgende variabelen
 * [Git](https://community.chocolatey.org/packages/git)
 * [Discord](https://community.chocolatey.org/packages/discord)
 * [Microsoft Visual Studio Code](https://community.chocolatey.org/packages/vscode)
+
+# Labo 9
+
+## Modules
+* [community.vmware.vmware_local_user_manage](https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_local_user_manager_module.html#ansible-collections-community-vmware-vmware-local-user-manager-module)
+* 

@@ -4,9 +4,9 @@
   vars:
     esxi_host: "192.168.12.15"
     esxi_user: "root"
-    esxi_pass: "ESXi123"
+    esxi_pass: "{{ lookup('file', 'esxi-pass') }}"
     local_user: "admin"
-    local_pass: "secretpass-1234"
+    local_pass: "{{ lookup('file', 'local-pass') }}"
 
   tasks:
     - name: add a user to the ESXi host

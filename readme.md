@@ -132,4 +132,4 @@ bestanden aanmaken
 
 ## Modules
 * [community.vmware.vmware_local_user_manage](https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_local_user_manager_module.html#ansible-collections-community-vmware-vmware-local-user-manager-module)
-* 
+* [community.vmware.vmware_deploy_ovf](https://docs.ansible.com/ansible/latest/collections/community/vmware/vmware_deploy_ovf_module.html)

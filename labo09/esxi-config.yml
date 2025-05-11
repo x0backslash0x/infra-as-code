@@ -2,11 +2,13 @@
   hosts: localhost
   gather_facts: false
   vars:
-    esxi_host: "192.168.12.15"
+    esxi_host: "192.168.12.5"
     esxi_user: "root"
     esxi_pass: "{{ lookup('file', 'esxi-pass') }}"
     local_user: "admin"
     local_pass: "{{ lookup('file', 'local-pass') }}"
+    ova_path: "./template_rocky9.vmx-20.ova"
+    vm_name: "rocky-linux"
 
   tasks:
     - name: add a user to the ESXi host
@@ -18,3 +20,19 @@
         local_user_name: "{{ local_user }}"
         local_user_password: "{{ local_pass }}"
       delegate_to: localhost
+      tags:
+        - useradd
+
+    - name: Deploy Rocky Linux VM from OVA
+      community.vmware.vmware_deploy_ovf:
+        validate_certs: false
+        hostname: "{{ esxi_host }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        ovf: "{{ ova_path }}"
+        name: "{{ vm_name }}"
+        datastore: "datastore1"
+        power_on: false
+      delegate_to: localhost
+      tags:
+        - deploy_vm

@@ -31,8 +31,21 @@
         password: "{{ esxi_pass }}"
         ovf: "{{ ova_path }}"
         name: "{{ vm_name }}"
-        datastore: "datastore1"
         power_on: false
       delegate_to: localhost
       tags:
         - deploy_vm
+
+    # error: "non-existing vm" or "module failed" 
+    - name: Power on Rocky Linux vm
+      community.vmware.vmware_guest_powerstate:
+        validate_certs: false
+        hostname: "{{ esxi_host }}"
+        username: "{{ esxi_user }}"
+        password: "{{ esxi_pass }}"
+        name: "{{ vm_name }}"
+        datacenter: "ha-datacenter"
+        folder: "{{ vm_name }}"
+        state: powered-on
+      tags:
+        - powered

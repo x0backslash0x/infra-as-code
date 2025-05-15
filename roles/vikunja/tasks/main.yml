@@ -1,2 +1,16 @@
 ---
 # tasks file for vikunja
+- name: create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - db
+    - files
+  tags:
+    - prep
+
+- name: deploy container
+  ansible.builtin.command: "docker run --name vikunja -d -p 3456:3456 -v $PWD/files:/app/vikunja/files -v $PWD/db:/db vikunja/vikunja"
+  tags:
+    - deploy

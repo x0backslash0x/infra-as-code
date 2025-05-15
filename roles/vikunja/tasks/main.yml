@@ -11,6 +11,15 @@
     - prep
 
 - name: deploy container
-  ansible.builtin.command: "docker run --name vikunja -d -p 3456:3456 -v $PWD/files:/app/vikunja/files -v $PWD/db:/db vikunja/vikunja"
+  #ansible.builtin.command: "docker run  --name vikunja -d -p 3456:3456 -v $PWD/files:/app/vikunja/files -v $PWD/db:/db vikunja/vikunja"
+  community.docker.docker_container:
+    name: vikunja
+    image: vikunja/vikunja
+    volumes:
+      - ./db:/db
+      - ./files:/app/vikunja/files
+    published_ports:
+      - 3456:3456
+    detach: true
   tags:
     - deploy

@@ -10,16 +10,47 @@
   tags:
     - prep
 
-- name: deploy container
-  #ansible.builtin.command: "docker run  --name vikunja -d -p 3456:3456 -v $PWD/files:/app/vikunja/files -v $PWD/db:/db vikunja/vikunja"
-  community.docker.docker_container:
-    name: vikunja
-    image: vikunja/vikunja
-    volumes:
-      - ./db:/db
-      - ./files:/app/vikunja/files
-    published_ports:
-      - 3456:3456
-    detach: true
+- name: deploy containers
+  block:
+    - name: create shared network
+      community.docker.docker_network:
+        name: "{{ network_name }}"
+    - name: start database container
+      community.docker.docker_container:
+        name: db
+        image: mariadb:10
+        volumes:
+          - ./db:/var/lib/mysql
+        env:
+          MYSQL_RANDOM_ROOT_PASSWORD: "true"
+          MYSQL_USER: "{{ db_user_name | string }}"
+          MYSQL_PASSWORD: "{{ db_user_pass | string }}"
+          MYSQL_DATABASE: "{{ db_name | string }}"
+        networks:
+          - name: "{{ network_name }}"
+        healthcheck:
+          test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $MYSQL_USER --password=$MYSQL_PASSWORD"]
+          interval: 2s
+          start_period: 30s
+        state: "healthy"
+    - name: start vikunja container
+      community.docker.docker_container:
+        name: vikunja
+        image: vikunja/vikunja
+        volumes:
+          # - ./db:/db
+          - ./files:/app/vikunja/files
+        env:
+          VIKUNJA_DATABASE_HOST: "db"
+          VIKUNJA_DATABASE_USER: "{{ db_user_name | string }}"
+          VIKUNJA_DATABASE_PASSWORD: "{{ db_user_pass | string }}"
+          VIKUNJA_DATABASE_TYPE: "mysql"
+          VIKUNJA_DATABASE_DATABASE: "{{ db_name | string }}"
+          VIKUNJA_SERVICE_JWTSECRET: "{{ jwt_secret | string }}"
+        published_ports:
+          - 3456:3456
+        networks:
+          - name: "{{ network_name }}"
+        detach: true
   tags:
     - deploy

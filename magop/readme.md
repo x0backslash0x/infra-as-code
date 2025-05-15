@@ -19,3 +19,11 @@ docker compose up
 2 containers
 * vikunja
 * database
+
+**commands**
+```
+mkdir -p $PWD/files $PWD/db
+docker network create shared
+docker run -d --network shared --name db -v $PWD/db:/var/lib/mysql -e MYSQL_RANDOM_ROOT_PASSWORD=true -e MYSQL_USER=dbuser -e MYSQL_PASSWORD=dbpass -e MYSQL_DATABASE=vikunja mariadb:10
+docker run -d --network shared --name vikunja -p 3456:3456 -v $PWD/files:/app/vikunja/files -e VIKUNJA_SERVICE_PUBLICURL=127.0.0.1 -e VIKUNJA_DATABASE_HOST=db -e VIKUNJA_DATABASE_USER=dbuser -e VIKUNJA_DATABASE_PASSWORD=dbpass -e IKUNJA_DATABASE_TYPE=mysql -e VIKUNJA_DATABASE_DATABASE=vikunja -e VIKUNJA_SERVICE_JWTSECRET=secrettokenstr1ng vikunja/vikunja
+```

@@ -1,2 +1,7 @@
 ---
 # vars file for vikunja
+db_user_name: dbuser
+db_user_pass: dbpass
+db_name: vikunja
+jwt_secret: secrettokenstr1ng
+network_name: shared

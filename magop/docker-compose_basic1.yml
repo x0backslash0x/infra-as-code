@@ -2,7 +2,31 @@ services:
   vikunja:
     image: vikunja/vikunja
     volumes:
-      - ./db:/db
       - ./files:/app/vikunja/files
+    environment:
+      VIKUNJA_DATABASE_HOST: db
+      VIKUNJA_DATABASE_USER: dbuser
+      VIKUNJA_DATABASE_PASSWORD: dbpass
+      VIKUNJA_DATABASE_TYPE: mysql
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_SERVICE_JWTSECRET: secrettokenstr1ng
     ports:
       - 3456:3456
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:10
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass
+      MYSQL_DATABASE: vikunja
+    volumes:
+      - ./db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"]
+      interval: 2s
+      start_period: 30s
+

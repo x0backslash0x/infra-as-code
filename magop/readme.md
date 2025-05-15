@@ -1,4 +1,6 @@
 # basic install 1
+1 container
+
 **commands**
 ```
 mkdir -p $PWD/files $PWD/db
@@ -12,3 +14,8 @@ mkdir -p $PWD/files $PWD/db
 chown 1000 $PWD/files $PWD/db
 docker compose up
 ```
+
+# basic install 2
+2 containers
+* vikunja
+* database

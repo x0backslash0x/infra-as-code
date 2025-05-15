@@ -1,0 +1,8 @@
+services:
+  vikunja:
+    image: vikunja/vikunja
+    volumes:
+      - ./db:/db
+      - ./files:/app/vikunja/files
+    ports:
+      - 3456:3456

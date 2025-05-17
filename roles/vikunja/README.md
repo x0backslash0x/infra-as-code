@@ -18,11 +18,13 @@ the tasks for generating an SSL certificate assume `/etc/ssl/cert` and `/etc/ssl
 Role Variables
 --------------
 
+* project_dir
 * db_user_name
 * db_user_pass
 * db_name
 * jwt_secret
 * network_name
+* username
 * cert_basedir
 * cert_cn
 * cert_privatekey
@@ -49,7 +51,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: vikunja }
+        - { role: vikunja, username: <username>, cert_cn: <common-name> }
 
 License
 -------

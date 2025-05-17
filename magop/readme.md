@@ -39,9 +39,8 @@ bestanden aanmaken
 
 * ansible.cfg     basis ansible config
 * hosts           host specificatie
-* become_passwd   sudo wachtwoord van ansible host
 
 playbook uitvoeren
 ```
-ansible-playbook playbook.yml --become-password-file become_passwd
+ansible-playbook playbook.yml
 ```

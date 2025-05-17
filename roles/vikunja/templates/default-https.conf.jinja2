@@ -1,0 +1,22 @@
+# /etc/nginx/conf.d/default.conf
+server {
+    listen       80;
+    #listen  [::]:80
+    listen  443 ssl;
+    server_name  {{ cert_cn }};
+
+    ssl_certificate     /etc/nginx/{{ cert_path }};
+    ssl_certificate_key /etc/nginx/{{ cert_privatekey }};
+    ssl_protocols       TLSv1.3;
+
+    location / { # proxy requests to vikunja
+        proxy_pass http://vikunja:3456;
+    }
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}

@@ -1,11 +1,12 @@
 ---
 # vars file for vikunja
+project_dir: "/home/{{ ansible_user }}/vikunja"
 db_user_name: dbuser
 db_user_pass: dbpass
 db_name: vikunja
 jwt_secret: secrettokenstr1ng
 network_name: shared
-cert_basedir: "/etc/ssl"
+cert_basedir: "ssl"
 cert_privatekey: "{{ cert_basedir }}/private/{{ cert_cn }}.key"
 cert_request: "{{ cert_basedir }}/csr/{{ cert_cn }}.csr"
 cert_path: "{{ cert_basedir }}/certs/{{ cert_cn }}.cert"

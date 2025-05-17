@@ -24,6 +24,11 @@ Dependencies
 collections:
 * community.docker
 
+images:
+* vikunja/vikunja
+* mariadb:10
+* nginx:1.27
+
 Example Playbook
 ----------------
 

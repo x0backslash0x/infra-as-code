@@ -1,4 +1,4 @@
-- name: Vikunja deployment
+- name: Vikunja reverse-proxy install
   hosts: host
   gather_facts: false
   roles:

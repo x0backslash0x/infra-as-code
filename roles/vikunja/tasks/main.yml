@@ -16,6 +16,37 @@
   tags:
     - prep
 
+- name: generate self-signed certificate
+  block:
+    - name: generate private key
+      community.crypto.openssl_privatekey:
+        path: "{{ cert_privatekey }}"
+        type: "RSA"
+        size: 4096
+        mode: "600"
+    - name: create directory for signing request
+      ansible.builtin.file:
+        path: "{{ cert_basedir }}/csr"
+        state: directory
+    - name: create signing request
+      community.crypto.openssl_csr:
+        privatekey_path: "{{ cert_privatekey }}"
+        path: "{{ cert_request }}"
+        common_name: "{{ cert_cn }}"
+        mode: "644"
+    - name: generate self-signed certificate
+      community.crypto.x509_certificate:
+        privatekey_path: "{{ cert_privatekey }}"
+        csr_path: "{{ cert_request }}"
+        provider: "selfsigned"
+        selfsigned_digest: sha512
+        selfsigned_not_after: +3m  # valid for 3 months
+        path: "{{ cert_path }}"
+        mode: "644"
+  become: yes
+  tags:
+    - cert
+
 - name: deploy containers
   block:
     - name: create shared network

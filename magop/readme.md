@@ -33,3 +33,15 @@ docker run -d --network shared --name vikunja -p 3456:3456 -v $PWD/files:/app/vi
 * vikunja
 * database
 * reverse proxy
+
+# gebruik
+bestanden aanmaken
+
+* ansible.cfg     basis ansible config
+* hosts           host specificatie
+* become_passwd   sudo wachtwoord van ansible host
+
+playbook uitvoeren
+```
+ansible-playbook playbook.yml --become-password-file become_passwd
+```

@@ -2,4 +2,4 @@
   hosts: host
   gather_facts: false
   roles:
-    - { role: vikunja }
+    - { role: vikunja, cert_cn: "localhost" }

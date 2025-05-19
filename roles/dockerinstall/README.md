@@ -2,7 +2,10 @@ Role dockerinstall
 ==================
 
 Install docker from the official repo.
-For now only installs on RHEL based distributions.
+For now only installs on RHEL & Debian based distributions.
+
+[Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
+[Install Docker Engine on RHEL](https://docs.docker.com/engine/install/rhel/)
 
 Modules
 ------------

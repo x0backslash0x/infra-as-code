@@ -19,11 +19,14 @@
       ansible.builtin.command:
         cmd: chmod a+r /etc/apt/keyrings/docker.asc
     - name: (5/12) add repository to Apt sources
-      ansible.builtin.blockinfile:
-        block: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable"
-        path: /etc/apt/sources.list.d/docker.list
-        create: true
-        state: present
+      ansible.builtin.shell:
+        cmd: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    # - name: (5/12) add repository to Apt sources
+      # ansible.builtin.blockinfile:
+      #   block: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable"
+      #   path: /etc/apt/sources.list.d/docker.list
+      #   create: true
+      #   state: present
     - name: (6/12) update repository
       ansible.builtin.command:
         cmd: apt update

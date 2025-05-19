@@ -34,6 +34,9 @@ Example Playbook
     - name: <play name>
       hosts: <hosts>
       gather_facts: True
+      gather_subset:
+        - "!all"
+        - "os_family"
       become: yes
       roles:
          - { role: dockerinstall, user: <user> }

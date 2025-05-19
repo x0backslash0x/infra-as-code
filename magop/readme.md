@@ -49,5 +49,5 @@ bestanden aanmaken
 
 playbook uitvoeren
 ```
-ansible-playbook playbook.yml -e user=<username> -e cn=<common name>
+ansible-playbook playbook.yml -e user=<username> -e cn=<common name> -K
 ```

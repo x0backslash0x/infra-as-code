@@ -1,6 +1,14 @@
 - name: Vikunja reverse-proxy install
   hosts: host
-  gather_facts: false
+  gather_facts: true
+  gather_subset:
+    - "!all"
+    - "os_family"
   remote_user: "{{ user }}"
+  become: yes
   roles:
+    - role: dockerinstall
+      vars:
+        user: "{{ user }}"
+      tags: docker
     - { role: vikunja, username: "{{ user }}", cert_cn: "{{ cn }}" }

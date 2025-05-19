@@ -1,9 +1,6 @@
 - name: Vikunja reverse-proxy install
   hosts: host
   gather_facts: false
-  remote_user: deb
+  remote_user: "{{ user }}"
   roles:
-    - { role: vikunja, username: "{{ user }}", cert_cn: "localhost" }
-
-  vars:
-    user: "deb"
+    - { role: vikunja, username: "{{ user }}", cert_cn: "{{ cn }}" }

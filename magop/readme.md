@@ -35,6 +35,13 @@ docker run -d --network shared --name vikunja -p 3456:3456 -v $PWD/files:/app/vi
 * reverse proxy
 
 # gebruik
+requirements controleren
+* op ansible controller
+  * python modules
+  * ansible collections
+* op host
+  * docker installatie
+
 bestanden aanmaken
 
 * ansible.cfg     basis ansible config
@@ -42,5 +49,5 @@ bestanden aanmaken
 
 playbook uitvoeren
 ```
-ansible-playbook playbook.yml
+ansible-playbook playbook.yml -e user=<username> -e cn=<common name>
 ```

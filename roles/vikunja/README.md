@@ -13,33 +13,25 @@ Requirements
 
 Docker must be installed
 The ansible_user must have access rights to run the docker command
-the tasks for generating an SSL certificate assume `/etc/ssl/cert` and `/etc/ssl/private` exist
 
 Role Variables
 --------------
 
+* ansible_user
 * project_dir
 * db_user_name
 * db_user_pass
 * db_name
 * jwt_secret
 * network_name
-* username
-* cert_basedir
-* cert_cn
-* cert_privatekey
-* cert_request
-* cert_path
 
 Dependencies
 ------------
 
+This role relies on the existence of the `certify` role
+
 collections:
 * community.docker
-* community.crypto
-
-python modules
-* cryptography >= 1.6
 
 images:
 * vikunja/vikunja
@@ -51,7 +43,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: vikunja, username: <username>, cert_cn: <common-name> }
+        - { role: vikunja, cert_cn: <common-name> }
 
 License
 -------

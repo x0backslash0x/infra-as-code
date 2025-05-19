@@ -1,0 +1,6 @@
+---
+# vars file for certify
+cert_basedir: "/ssl"
+cert_privatekey: "{{ cert_basedir }}/private/{{ cert_commonname }}.key"
+cert_request: "{{ cert_basedir }}/csr/{{ cert_commonname }}.csr"
+cert_path: "{{ cert_basedir }}/certs/{{ cert_commonname }}.cert"

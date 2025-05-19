@@ -9,14 +9,14 @@
     with_items:
       - db
       - files
-  - name: create directories for SSL assets
-    ansible.builtin.file:
-      path: "{{ project_dir }}/{{ cert_basedir }}/{{ item }}"
-      state: directory
-    with_items:
-      - private
-      - csr
-      - certs
+  # - name: create directories for SSL assets
+  #   ansible.builtin.file:
+  #     path: "{{ project_dir }}/{{ cert_basedir }}/{{ item }}"
+  #     state: directory
+  #   with_items:
+  #     - private
+  #     - csr
+  #     - certs
   - name: copy nginx config
     ansible.builtin.template:
       src: "default-https.conf.jinja2"
@@ -25,28 +25,33 @@
     - prep
 
 - name: generate self-signed certificate
-  block:
-    - name: generate private key
-      community.crypto.openssl_privatekey:
-        path: "{{ project_dir }}/{{ cert_privatekey }}"
-        type: "RSA"
-        size: 4096
-        mode: "600"
-    - name: create signing request
-      community.crypto.openssl_csr:
-        privatekey_path: "{{ project_dir }}/{{ cert_privatekey }}"
-        path: "{{ project_dir }}/{{ cert_request }}"
-        common_name: "{{ cert_cn }}"
-        mode: "644"
-    - name: generate self-signed certificate
-      community.crypto.x509_certificate:
-        privatekey_path: "{{ project_dir }}/{{ cert_privatekey }}"
-        csr_path: "{{ project_dir }}/{{ cert_request }}"
-        provider: "selfsigned"
-        selfsigned_digest: sha512
-        selfsigned_not_after: +3m  # valid for 3 months
-        path: "{{ project_dir }}/{{ cert_path }}"
-        mode: "644"
+  import_role:
+    name: certify
+  vars:
+    start_dir: "{{ project_dir }}"
+    cert_commonname: "{{ cert_cn }}"
+#   block:
+#     - name: generate private key
+#       community.crypto.openssl_privatekey:
+#         path: "{{ project_dir }}/{{ cert_privatekey }}"
+#         type: "RSA"
+#         size: 4096
+#         mode: "600"
+#     - name: create signing request
+#       community.crypto.openssl_csr:
+#         privatekey_path: "{{ project_dir }}/{{ cert_privatekey }}"
+#         path: "{{ project_dir }}/{{ cert_request }}"
+#         common_name: "{{ cert_cn }}"
+#         mode: "644"
+#     - name: generate self-signed certificate
+#       community.crypto.x509_certificate:
+#         privatekey_path: "{{ project_dir }}/{{ cert_privatekey }}"
+#         csr_path: "{{ project_dir }}/{{ cert_request }}"
+#         provider: "selfsigned"
+#         selfsigned_digest: sha512
+#         selfsigned_not_after: +3m  # valid for 3 months
+#         path: "{{ project_dir }}/{{ cert_path }}"
+#         mode: "644"
   tags:
     - cert
 

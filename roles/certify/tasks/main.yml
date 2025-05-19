@@ -1,0 +1,34 @@
+---
+# tasks file for certify
+- name: create directories for SSL assets
+  ansible.builtin.file:
+    path: "{{ start_dir }}/{{ cert_basedir }}/{{ item }}"
+    state: directory
+  with_items:
+    - private
+    - csr
+    - certs
+
+- name: generate private key
+  community.crypto.openssl_privatekey:
+    path: "{{ start_dir }}/{{ cert_privatekey }}"
+    type: "RSA"
+    size: 4096
+    mode: "600"
+
+- name: create signing request
+  community.crypto.openssl_csr:
+    privatekey_path: "{{ start_dir }}/{{ cert_privatekey }}"
+    path: "{{ start_dir }}/{{ cert_request }}"
+    common_name: "{{ cert_commonname }}"
+    mode: "644"
+
+- name: generate self-signed certificate
+  community.crypto.x509_certificate:
+    privatekey_path: "{{ start_dir }}/{{ cert_privatekey }}"
+    csr_path: "{{ start_dir }}/{{ cert_request }}"
+    provider: "selfsigned"
+    selfsigned_digest: sha512
+    selfsigned_not_after: +3m  # valid for 3 months
+    path: "{{ start_dir }}/{{ cert_path }}"
+    mode: "644"

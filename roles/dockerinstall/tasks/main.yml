@@ -3,56 +3,56 @@
 
 - name: Set up Docker repository
   block:
-    - name: install certificates package
+    - name: (1/12) install certificates package
       ansible.builtin.package:
         name:
           - ca-certificates
           - curl
         state: present
-    - name: install keyrings
+    - name: (2/12) install keyrings
       ansible.builtin.command:
         cmd: install -m 0755 -d /etc/apt/keyrings
-    - name: download official GPG key
+    - name: (3/12) download official GPG key
       ansible.builtin.command:
         cmd: curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-    - name: change permissions on GPG key
+    - name: (4/12) change permissions on GPG key
       ansible.builtin.command:
         cmd: chmod a+r /etc/apt/keyrings/docker.asc
-    - name: add repository to Apt sources
+    - name: (5/12) add repository to Apt sources
       ansible.builtin.blockinfile:
         block: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable"
         path: /etc/apt/sources.list.d/docker.list
         create: true
         state: present
-    - name: update repository
+    - name: (6/12) update repository
       ansible.builtin.command:
         cmd: apt update
-    - name: update system
+    - name: (7/12) update system
       import_role:
         name: updateall
   when: ansible_facts.os_family == "Debian"
 
-- name: set up docker repository (Red Hat based)
+- name: (8/12) set up docker repository (Red Hat based)
   ansible.builtin.command: sudo dnf config-manager --add-repo "{{ docker_official_repo }}"
   when: ansible_facts.os_family == "RedHat"
 
-- name: install docker
+- name: (9/12) install docker
   ansible.builtin.package:
     name: "{{ docker_dependencies }}"
     state: latest
 
-- name: Start Docker service
+- name: (10/12) Start Docker service
   service:
     name: docker
     state: started
     enabled: yes
 
-- name: Grant permission to run docker command
+- name: (11/12) Grant permission to run docker command
   ansible.builtin.user:
     append: true
     groups: docker
     name: "{{ user }}"
 
-- name: reboot
+- name: (12/12) reboot
   import_role:
     name: reboot

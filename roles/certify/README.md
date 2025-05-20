@@ -16,6 +16,7 @@ Role Variables
 
 * start_dir
 * provider
+* acme_directory_production
 * acme_directory_staging
 * acme_account_key
 * acme_challenge_dir

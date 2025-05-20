@@ -38,7 +38,7 @@
   block:  # using http-01 challenge
     - name: create challenge
       acme_certificate:
-        acme_directory: "{{ acme_directory_staging }}"
+        acme_directory: "{{ acme_directory_production }}"
         acme_version: 2
         challenge: http-01
         terms_agreed: yes
@@ -67,7 +67,7 @@
             dest: "{{ cert_basedir }}/{{ http_challenge['challenge_data'][cert_commonname]['http-01']['resource'] }}"
         - name: validate challenge
           acme_certificate:
-            acme_directory: "{{ acme_directory_staging }}"
+            acme_directory: "{{ acme_directory_production }}"
             acme_version: 2
             challenge: http-01
             account_key_src: "{{ acme_account_key }}"

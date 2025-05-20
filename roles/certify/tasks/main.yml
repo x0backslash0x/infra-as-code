@@ -65,22 +65,22 @@
           ansible.builtin.copy:
             content: "{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource_value'] }}"
             dest: "{{ start_dir }}/ssl/{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource'] }}"
+        - name: validate challenge
+          acme_certificate:
+            acme_directory: "{{ acme_directory_staging }}"
+            acme_version: 2
+            challenge: http-01
+            account_key_src: "{{ start_dir }}/ssl/private/account.key"
+            csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+            dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
+            fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
+            chain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-intermediate.crt"
+            data: "{{ http_challenge }}"
+        - name: stop webserver
+          community.docker.docker_container:
+            name: validation
+            state: stopped
       when: http_challenge is changed and cert_commonname in http_challenge['challenge_data']
-    - name: validate challenge
-      acme_certificate:
-        acme_directory: "{{ acme_directory_staging }}"
-        acme_version: 2
-        challenge: http-01
-        account_key_src: "{{ start_dir }}/ssl/private/account.key"
-        csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-        dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
-        fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
-        chain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-intermediate.crt"
-        data: "{{ http_challenge }}"
-    - name: stop webserver
-      community.docker.docker_container:
-        name: validation
-        state: stopped
   when: provider == "letsencrypt"
 
 - name: generate self-signed certificate

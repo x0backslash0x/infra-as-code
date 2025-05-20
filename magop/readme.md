@@ -1,4 +1,35 @@
-# basic install 1
+# Overzicht
+Het verloop van deze play valt grotendeels op de delen in volgende stappen
+* docker installeren
+* SSL certifikaat aanmaken
+* containers opzetten
+
+# Depencencies
+**ansible rollen**
+* dockerinstall
+* reboot
+* certify
+* vikunja
+
+***ansible modules**
+* acme_certificates
+* ansible.builtin.file
+* ansible.builtin.template
+* ansible.builtin.copy
+* ansible.builtin.package
+* ansible.builtin.command
+* ansible.builtin.shell
+* ansible.builtin.service
+* ansible.builtin.user
+* ansible.builtin.reboot
+* community.crypto.openssl_privatekey
+* community.crypto.openssl_csr
+* community.crypto.x509_certificate
+* community.docker.docker_container
+* community.docker.docker_network
+
+# Installatie Vikunja
+## basic install 1
 1 container
 
 **commands**
@@ -15,7 +46,7 @@ chown 1000 $PWD/files $PWD/db
 docker compose up
 ```
 
-# basic install 2
+## basic install 2
 2 containers
 * vikunja
 * database
@@ -28,7 +59,7 @@ docker run -d --network shared --name db -v $PWD/db:/var/lib/mysql -e MYSQL_RAND
 docker run -d --network shared --name vikunja -p 3456:3456 -v $PWD/files:/app/vikunja/files -e VIKUNJA_SERVICE_PUBLICURL=127.0.0.1 -e VIKUNJA_DATABASE_HOST=db -e VIKUNJA_DATABASE_USER=dbuser -e VIKUNJA_DATABASE_PASSWORD=dbpass -e IKUNJA_DATABASE_TYPE=mysql -e VIKUNJA_DATABASE_DATABASE=vikunja -e VIKUNJA_SERVICE_JWTSECRET=secrettokenstr1ng vikunja/vikunja
 ```
 
-# reverse-proxy install
+## reverse-proxy install
 3 containers
 * vikunja
 * database

@@ -1,12 +1,15 @@
 Role certify
 =========
 
-Generate a self-signed certificate, valid for 90 days
+Generate an SSL certificate
+* either self-signed, valid for 90 days
+* or via Let's Encrypt
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Docker must be installed.
+The Let's Encrypt validation procedure relies on an nginx container for facilitating the `http-01` validation method.
 
 Role Variables
 --------------
@@ -24,6 +27,7 @@ Dependencies
 
 collections:
 * community.crypto
+* community.docker
 
 python modules
 * cryptography >= 1.6

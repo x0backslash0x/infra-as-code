@@ -1,58 +1,58 @@
 ---
-# # tasks file for certify
-# - name: create directories for SSL assets
-#   ansible.builtin.file:
-#     path: "{{ start_dir }}/ssl/{{ item }}"
-#     state: directory
-#   with_items:
-#     - private
-#     - csr
-#     - certs
+# tasks file for certify
+- name: create directories for SSL assets
+  ansible.builtin.file:
+    path: "{{ start_dir }}/ssl/{{ item }}"
+    state: directory
+  with_items:
+    - private
+    - csr
+    - certs
 
-#   # check for an existing key first
-# - name: generate certificate key  # used for the csr & certificate
-#   community.crypto.openssl_privatekey:
-#     path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
-#     type: "RSA"
-#     size: 4096
-#     mode: "600"
+  # check for an existing key first
+- name: generate certificate key  # used for the csr & certificate
+  community.crypto.openssl_privatekey:
+    path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
+    type: "RSA"
+    size: 4096
+    mode: "600"
 
-#   # check for an existing key first
-# - name: generate Let's Encrypt account key  # used for let's encrypt account authentication
-#   community.crypto.openssl_privatekey:
-#     path: "{{ start_dir }}/ssl/private/account.key"
-#     type: "RSA"
-#     size: 4096
-#     mode: "600"
-#   when: provider == "letsencrypt"
+  # check for an existing key first
+- name: generate Let's Encrypt account key  # used for let's encrypt account authentication
+  community.crypto.openssl_privatekey:
+    path: "{{ start_dir }}/ssl/private/account.key"
+    type: "RSA"
+    size: 4096
+    mode: "600"
+  when: provider == "letsencrypt"
 
   # check for an existing valid request first
-# - name: create signing request
-#   community.crypto.openssl_csr:
-#     privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
-#     path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-#     common_name: "www.patricklanove.me"
-#     mode: "644"
+- name: create signing request
+  community.crypto.openssl_csr:
+    privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
+    path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+    common_name: "www.patricklanove.me"
+    mode: "644"
 
 - name: request Let's Encrypt certificate
   block:  # using http-01 challenge
-    # - name: create challenge
-    #   acme_certificate:
-    #     acme_directory: "{{ acme_directory_staging }}"
-    #     acme_version: 2
-    #     challenge: http-01
-    #     terms_agreed: yes
-    #     account_key_src: "{{ start_dir }}/ssl/private/account.key"
-    #     csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-    #     dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
-    #     fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
-    #   register: "http_challenge"
+    - name: create challenge
+      acme_certificate:
+        acme_directory: "{{ acme_directory_staging }}"
+        acme_version: 2
+        challenge: http-01
+        terms_agreed: yes
+        account_key_src: "{{ start_dir }}/ssl/private/account.key"
+        csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+        dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
+        fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
+      register: "http_challenge"
     - name: fulfill challenge
       block:
-        # - name: create validation directory
-        #   ansible.builtin.file:
-        #     path: "{{ start_dir }}/ssl/.well-known/acme-challenge/"
-        #     state: directory
+        - name: create validation directory
+          ansible.builtin.file:
+            path: "{{ start_dir }}/ssl/.well-known/acme-challenge/"
+            state: directory
         - name: start webserver
           community.docker.docker_container:
             name: validation
@@ -61,22 +61,22 @@
               - "{{ start_dir }}/ssl/.well-known/acme-challenge/:/usr/share/nginx/html/.well-known/acme-challenge/"
             published_ports:
               - 80:80
-      #   - name: create validation resource
-      #     ansible.builtin.copy:
-      #       content: "{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource_value'] }}"
-      #       dest: "{{ start_dir }}/ssl/{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource'] }}"
-      # when: http_challenge is changed and cert_commonname in http_challenge['challenge_data']
-    # - name: validate challenge
-    #   acme_certificate:
-    #     acme_directory: "{{ acme_directory_staging }}"
-    #     acme_version: 2
-    #     challenge: http-01
-    #     account_key_src: "{{ start_dir }}/ssl/private/account.key"
-    #     csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-    #     dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
-    #     fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
-    #     chain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-intermediate.crt"
-    #     data: "{{ http_challenge }}"
+        - name: create validation resource
+          ansible.builtin.copy:
+            content: "{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource_value'] }}"
+            dest: "{{ start_dir }}/ssl/{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource'] }}"
+      when: http_challenge is changed and cert_commonname in http_challenge['challenge_data']
+    - name: validate challenge
+      acme_certificate:
+        acme_directory: "{{ acme_directory_staging }}"
+        acme_version: 2
+        challenge: http-01
+        account_key_src: "{{ start_dir }}/ssl/private/account.key"
+        csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+        dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
+        fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
+        chain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-intermediate.crt"
+        data: "{{ http_challenge }}"
     - name: stop webserver
       community.docker.docker_container:
         name: validation

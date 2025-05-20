@@ -38,6 +38,15 @@
         dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
         fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
       register: "http_challenge"
+    - name: create challenge destination
+      ansible.builtin.file:
+        path: "{{ start_dir }}/ssl/.well-known/acme-challenge/"
+        state: directory
+    - name: fulfill challenge
+      ansible.builtin.copy:
+        content: "{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource_value'] }}"
+        dest: "{{ start_dir }}/ssl/{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource'] }}"
+      when: http_challenge is changed and cert_commonname in http_challenge['challenge_data']
   when: provider == "letsencrypt"
 
 - name: generate self-signed certificate

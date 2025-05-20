@@ -1,5 +1,7 @@
 ---
 # vars file for certify
+provider: "letsencrypt"
+acme_directory_staging: "https://acme-staging-v02.api.letsencrypt.org/directory"
 # cert_basedir: "/ssl"
 # cert_privatekey: "{{ cert_basedir }}/private/{{ cert_commonname }}.key"
 # cert_request: "{{ cert_basedir }}/csr/{{ cert_commonname }}.csr"

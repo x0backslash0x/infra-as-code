@@ -9,6 +9,7 @@
     - csr
     - certs
 
+  # check for an existing key first
 - name: generate private key
   community.crypto.openssl_privatekey:
     path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
@@ -16,12 +17,28 @@
     size: 4096
     mode: "600"
 
+  # check for an existing valid request first
 - name: create signing request
   community.crypto.openssl_csr:
     privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
     path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
     common_name: "www.patricklanove.me"
     mode: "644"
+
+- name: request Let's Encrypt certificate
+  block:  # using http-01 challenge
+    - name: create challenge
+      acme_certificate:
+        acme_directory: "{{ acme_directory_staging }}"
+        acme_version: 2
+        challenge: http-01
+        terms_agreed: yes
+        account_key_src: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
+        csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+        dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
+        fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
+      register: "http_challenge"
+  when: provider == "letsencrypt"
 
 - name: generate self-signed certificate
   community.crypto.x509_certificate:
@@ -32,3 +49,4 @@
     selfsigned_not_after: +3m  # valid for 3 months
     path: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
     mode: "644"
+  when: provider == "self-signed"

@@ -2,7 +2,7 @@
 # tasks file for certify
 - name: create directories for SSL assets
   ansible.builtin.file:
-    path: "{{ start_dir }}/ssl/{{ item }}"
+    path: "{{ cert_basedir }}/{{ item }}"
     state: directory
   with_items:
     - private
@@ -12,7 +12,7 @@
   # check for an existing key first
 - name: generate certificate key  # used for the csr & certificate
   community.crypto.openssl_privatekey:
-    path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
+    path: "{{ cert_private_key }}"
     type: "RSA"
     size: 4096
     mode: "600"
@@ -20,7 +20,7 @@
   # check for an existing key first
 - name: generate Let's Encrypt account key  # used for let's encrypt account authentication
   community.crypto.openssl_privatekey:
-    path: "{{ start_dir }}/ssl/private/account.key"
+    path: "{{ acme_account_key }}"
     type: "RSA"
     size: 4096
     mode: "600"
@@ -29,9 +29,9 @@
   # check for an existing valid request first
 - name: create signing request
   community.crypto.openssl_csr:
-    privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
-    path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-    common_name: "www.patricklanove.me"
+    privatekey_path: "{{ cert_private_key }}"
+    path: "{{ cert_csr }}"
+    common_name: "{{ cert_commonname }}"
     mode: "644"
 
 - name: request Let's Encrypt certificate
@@ -42,39 +42,39 @@
         acme_version: 2
         challenge: http-01
         terms_agreed: yes
-        account_key_src: "{{ start_dir }}/ssl/private/account.key"
-        csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-        dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
-        fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
+        account_key_src: "{{ acme_account_key }}"
+        csr: "{{ cert_csr }}"
+        dest: "{{ cert_path }}"
+        fullchain_dest: "{{ cert_fullchain }}"
       register: "http_challenge"
     - name: fulfill challenge
       block:
         - name: create validation directory
           ansible.builtin.file:
-            path: "{{ start_dir }}/ssl/.well-known/acme-challenge/"
+            path: "{{ cert_basedir }}/{{ acme_challenge_dir }}"
             state: directory
         - name: start webserver
           community.docker.docker_container:
             name: validation
             image: nginx:1.27
             volumes:
-              - "{{ start_dir }}/ssl/.well-known/acme-challenge/:/usr/share/nginx/html/.well-known/acme-challenge/"
+              - "{{ cert_basedir }}/{{ acme_challenge_dir }}/:/usr/share/nginx/html/{{ acme_challenge_dir }}/"
             published_ports:
               - 80:80
         - name: create validation resource
           ansible.builtin.copy:
-            content: "{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource_value'] }}"
-            dest: "{{ start_dir }}/ssl/{{ http_challenge['challenge_data']['www.patricklanove.me']['http-01']['resource'] }}"
+            content: "{{ http_challenge['challenge_data'][cert_commonname]['http-01']['resource_value'] }}"
+            dest: "{{ cert_basedir }}/{{ http_challenge['challenge_data'][cert_commonname]['http-01']['resource'] }}"
         - name: validate challenge
           acme_certificate:
             acme_directory: "{{ acme_directory_staging }}"
             acme_version: 2
             challenge: http-01
-            account_key_src: "{{ start_dir }}/ssl/private/account.key"
-            csr: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
-            dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
-            fullchain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-fullchain.crt"
-            chain_dest: "{{ start_dir }}/ssl/certs/www.patricklanove.me-intermediate.crt"
+            account_key_src: "{{ acme_account_key }}"
+            csr: "{{ cert_csr }}"
+            dest: "{{ cert_path }}"
+            fullchain_dest: "{{ cert_fullchain }}"
+            chain_dest: "{{ cert_chain }}"
             data: "{{ http_challenge }}"
         - name: stop webserver
           community.docker.docker_container:
@@ -85,11 +85,11 @@
 
 - name: generate self-signed certificate
   community.crypto.x509_certificate:
-    privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
-    csr_path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+    privatekey_path: "{{ cert_private_key }}"
+    csr_path: "{{ cert_csr }}"
     provider: "selfsigned"
     selfsigned_digest: sha512
     selfsigned_not_after: +3m  # valid for 3 months
-    path: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
+    path: "{{ cert_path }}"
     mode: "644"
   when: provider == "self-signed"

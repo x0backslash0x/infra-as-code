@@ -12,11 +12,11 @@ Role Variables
 --------------
 
 * start_dir
-* cert_basedir
-* cert_commonname
-* cert_privatekey
-* cert_request
-* cert_path
+<!-- * cert_basedir -->
+<!-- * cert_commonname -->
+<!-- * cert_privatekey -->
+<!-- * cert_request -->
+<!-- * cert_path -->
 
 
 Dependencies
@@ -36,7 +36,7 @@ Example Playbook
     - role: certify
         vars:
           start_dir: <absolute path>
-          cert_commonname: <common-name>
+          <!-- cert_commonname: <common-name> -->
 
 License
 -------

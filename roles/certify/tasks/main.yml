@@ -2,7 +2,7 @@
 # tasks file for certify
 - name: create directories for SSL assets
   ansible.builtin.file:
-    path: "{{ start_dir }}/{{ cert_basedir }}/{{ item }}"
+    path: "{{ start_dir }}/ssl/{{ item }}"
     state: directory
   with_items:
     - private
@@ -11,24 +11,24 @@
 
 - name: generate private key
   community.crypto.openssl_privatekey:
-    path: "{{ start_dir }}/{{ cert_privatekey }}"
+    path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
     type: "RSA"
     size: 4096
     mode: "600"
 
 - name: create signing request
   community.crypto.openssl_csr:
-    privatekey_path: "{{ start_dir }}/{{ cert_privatekey }}"
-    path: "{{ start_dir }}/{{ cert_request }}"
-    common_name: "{{ cert_commonname }}"
+    privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
+    path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
+    common_name: "www.patricklanove.me"
     mode: "644"
 
 - name: generate self-signed certificate
   community.crypto.x509_certificate:
-    privatekey_path: "{{ start_dir }}/{{ cert_privatekey }}"
-    csr_path: "{{ start_dir }}/{{ cert_request }}"
+    privatekey_path: "{{ start_dir }}/ssl/private/www.patricklanove.me.key"
+    csr_path: "{{ start_dir }}/ssl/csr/www.patricklanove.me.csr"
     provider: "selfsigned"
     selfsigned_digest: sha512
     selfsigned_not_after: +3m  # valid for 3 months
-    path: "{{ start_dir }}/{{ cert_path }}"
+    path: "{{ start_dir }}/ssl/certs/www.patricklanove.me.pem.cert"
     mode: "644"

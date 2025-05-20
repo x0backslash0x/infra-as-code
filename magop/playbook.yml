@@ -7,8 +7,23 @@
   remote_user: "{{ user }}"
   become: yes
   roles:
+      # docker installeren
     - role: dockerinstall
       vars:
         user: "{{ user }}"
       tags: docker
-    - { role: vikunja, username: "{{ user }}", cert_cn: "{{ cn }}" }
+
+    # SSL certifikaat aanmaken
+    - role: certify
+      vars:
+        start_dir: "{{ project_dir }}"
+        cert_commonname: "{{ cn }}"
+      tags: cert
+      when: uri_scheme == "https"
+
+    # containers opzetten
+    - role: vikunja
+      tags: vikunja
+
+  vars:
+    project_dir: "/home/{{ ansible_user }}/vikunja"

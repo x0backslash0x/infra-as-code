@@ -2,7 +2,7 @@
 server {
     listen       80;
     #listen  [::]:80;
-    server_name  localhost;
+    server_name  {{ cert_commonname | default('localhost') }};
 
     location / { # proxy requests to vikunja
         proxy_pass http://vikunja:3456;

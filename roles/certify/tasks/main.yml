@@ -93,3 +93,11 @@
     path: "{{ cert_path }}"
     mode: "644"
   when: provider == "self-signed"
+
+- name: add facts
+  ansible.builtin.set_fact:
+    cert_basedir: "{{ start_dir }}/ssl"
+    acme_challenge_dir: ".well-known/acme-challenge"
+    cert_private_key: "{{ cert_basedir }}/private/{{ cert_commonname }}.key"
+    cert_path: "{{ cert_basedir }}/certs/{{ cert_commonname }}.pem.cert"
+    cert_commonname: "{{ cert_commonname }}"

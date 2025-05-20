@@ -28,6 +28,12 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 * community.docker.docker_container
 * community.docker.docker_network
 
+# variables
+
+* user
+* cn
+* uri_scheme
+
 # Installatie Vikunja
 ## basic install 1
 1 container
@@ -80,5 +86,5 @@ bestanden aanmaken
 
 playbook uitvoeren
 ```
-ansible-playbook playbook.yml -e user=<username> -e cn=<common name> -K
+ansible-playbook playbook.yml -e user=<username> -e cn=<common name> -e uri_scheme=<http|https> -K
 ```

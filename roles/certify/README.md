@@ -21,9 +21,11 @@ Role Variables
 * acme_challenge_dir
 * cert_basedir
 * cert_commonname
-* cert_privatekey
+* cert_privatekey_path
+* cert_privatekey_file
 * cert_csr
 * cert_path
+* cert_file
 * cert_chain
 * cert_fullchain
 

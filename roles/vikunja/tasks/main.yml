@@ -85,8 +85,8 @@
         volumes:
           - "{{ cert_basedir | default(omit) }}/{{ acme_challenge_dir }}/:/usr/share/nginx/html/{{ acme_challenge_dir }}/"
           - "{{ project_dir }}/default-{{ uri_scheme }}.conf:/etc/nginx/conf.d/default.conf"
-          - "{{ project_dir }}/{{ cert_path | default(omit) }}:/etc/nginx/{{ cert_path }}"
-          - "{{ project_dir }}/{{ cert_private_key | default(omit) }}:/etc/nginx/{{ cert_private_key }}"
+          - "{{ cert_path | default(omit) }}:/etc/nginx/ssl/{{ cert_file}}"
+          - "{{ cert_private_key_path | default(omit) }}:/etc/nginx/ssl/{{ cert_private_key_file }}"
         published_ports:
           - 80:80
           - 443:443

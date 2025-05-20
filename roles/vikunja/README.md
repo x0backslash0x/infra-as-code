@@ -43,7 +43,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - { role: vikunja, cert_cn: <common-name> }
+        - { role: vikunja }
 
 License
 -------

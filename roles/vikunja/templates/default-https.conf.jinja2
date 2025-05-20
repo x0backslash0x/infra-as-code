@@ -5,8 +5,8 @@ server {
     listen  443 ssl;
     server_name  {{ cert_commonname }};
 
-    ssl_certificate     /etc/nginx/{{ cert_path }};
-    ssl_certificate_key /etc/nginx/{{ cert_private_key }};
+    ssl_certificate     /etc/nginx/ssl/{{ cert_file }};
+    ssl_certificate_key /etc/nginx/ssl/{{ cert_private_key_file }};
     ssl_protocols       TLSv1.3;
 
     location / { # proxy requests to vikunja

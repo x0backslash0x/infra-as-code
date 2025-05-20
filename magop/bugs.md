@@ -12,8 +12,8 @@ nginx cannot load the Let's Encrypt certificate
 
 open bugs
 ---------
-* BUG20250520-1
 
 
 closed bugs
 -----------
+* BUG20250520-1

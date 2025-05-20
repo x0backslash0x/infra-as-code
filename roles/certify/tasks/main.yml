@@ -12,7 +12,7 @@
   # check for an existing key first
 - name: generate certificate key  # used for the csr & certificate
   community.crypto.openssl_privatekey:
-    path: "{{ cert_private_key }}"
+    path: "{{ cert_private_key_path }}"
     type: "RSA"
     size: 4096
     mode: "600"
@@ -29,7 +29,7 @@
   # check for an existing valid request first
 - name: create signing request
   community.crypto.openssl_csr:
-    privatekey_path: "{{ cert_private_key }}"
+    privatekey_path: "{{ cert_private_key_path }}"
     path: "{{ cert_csr }}"
     common_name: "{{ cert_commonname }}"
     mode: "644"
@@ -85,7 +85,7 @@
 
 - name: generate self-signed certificate
   community.crypto.x509_certificate:
-    privatekey_path: "{{ cert_private_key }}"
+    privatekey_path: "{{ cert_private_key_path }}"
     csr_path: "{{ cert_csr }}"
     provider: "selfsigned"
     selfsigned_digest: sha512
@@ -98,6 +98,8 @@
   ansible.builtin.set_fact:
     cert_basedir: "{{ start_dir }}/ssl"
     acme_challenge_dir: ".well-known/acme-challenge"
-    cert_private_key: "{{ cert_basedir }}/private/{{ cert_commonname }}.key"
-    cert_path: "{{ cert_basedir }}/certs/{{ cert_commonname }}.pem.cert"
+    cert_private_key_path: "{{ cert_private_key_path }}"
+    cert_private_key_file: "{{ cert_private_key_file }}"
+    cert_path: "{{ cert_path }}"
+    cert_file: "{{ cert_file }}"
     cert_commonname: "{{ cert_commonname }}"

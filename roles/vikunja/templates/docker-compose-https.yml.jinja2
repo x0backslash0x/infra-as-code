@@ -1,11 +1,15 @@
 services:
   rproxy:
-    container_name: rproxy
     image: nginx:1.27
+    container_name: rproxy
     volumes:
-      - "{{ project_dir }}/default-http.conf:/etc/nginx/conf.d/default.conf"
+      - "{{ cert_basedir }}/{{ acme_challenge_dir }}/:/usr/share/nginx/html/{{ acme_challenge_dir }}/"
+      - "{{ project_dir }}/default-https.conf:/etc/nginx/conf.d/default.conf"
+      - "{{ cert_path }}:/etc/nginx/ssl/{{ cert_file}}"
+      - "{{ cert_private_key_path }}:/etc/nginx/ssl/{{ cert_private_key_file }}"
     ports:
       - 80:80
+      - 443:443
     networks:
       - vikunja-net
     depends_on:

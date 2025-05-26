@@ -10,7 +10,7 @@
       # docker installeren
     - role: dockerinstall
       vars:
-        user: "{{ user }}"
+        docker_user: "{{ user }}"
       tags: docker
 
     # SSL certifikaat aanmaken

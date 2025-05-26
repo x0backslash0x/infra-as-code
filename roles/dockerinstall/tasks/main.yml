@@ -54,7 +54,7 @@
   ansible.builtin.user:
     append: true
     groups: docker
-    name: "{{ user }}"
+    name: "{{ docker_user }}"
 
 - name: (12/12) reboot
   import_role:

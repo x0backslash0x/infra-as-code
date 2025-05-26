@@ -1,0 +1,49 @@
+services:
+  rproxy:
+    image: nginx:1.27
+    volumes:
+      - "{{ project_dir }}/default-http.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+      - 80:80
+    networks:
+      - vikunja-net
+    depends_on:
+      db:
+        condition: service_healthy
+  vikunja:
+    image: vikunja/vikunja
+    volumes:
+      - ./files:/app/vikunja/files
+    environment:
+      VIKUNJA_DATABASE_HOST: "db"
+      VIKUNJA_DATABASE_USER: "{{ db_user_name }}"
+      VIKUNJA_DATABASE_PASSWORD: "{{ db_user_pass }}"
+      VIKUNJA_DATABASE_TYPE: "mysql"
+      VIKUNJA_DATABASE_DATABASE: "{{ db_name }}"
+      VIKUNJA_SERVICE_JWTSECRET: "{{ jwt_secret }}"
+    ports:
+      - 3456:3456
+    networks:
+      - vikunja-net
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:10
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_USER: "{{ db_user_name }}"
+      MYSQL_PASSWORD: "{{ db_user_pass }}"
+      MYSQL_DATABASE: "{{ db_name }}"
+    networks:
+      - vikunja-net
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"]
+      interval: 2s
+      start_period: 30s
+
+networks:
+  vikunja-net:
+    external: true

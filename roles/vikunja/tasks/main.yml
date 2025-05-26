@@ -13,85 +13,24 @@
     ansible.builtin.template:
       src: "default-{{ uri_scheme }}.conf.jinja2"
       dest: "{{ project_dir }}/default-{{ uri_scheme }}.conf"
+  - name: Provision Docker compose file
+    ansible.builtin.template:
+      src: templates/docker-compose-{{ uri_scheme }}.yml.jinja2
+      dest: "{{ project_dir }}/docker-compose.yml"
+      mode: '0644'
+      owner: "{{ docker_user }}"
+      group: "{{ docker_user }}"
   tags:
     - prep
-
-# - name: generate self-signed certificate
-#   import_role:
-#     name: certify
-#   vars:
-#     start_dir: "{{ project_dir }}"
-#     cert_commonname: "{{ cert_cn }}" 
-#   tags:
-#     - cert
 
 - name: deploy containers
   block:
     - name: create shared network
       community.docker.docker_network:
-        name: "{{ network_name }}"
-    - name: start database container
-      community.docker.docker_container:
-        name: db
-        image: mariadb:10
-        volumes:
-          - ./db:/var/lib/mysql
-        env:
-          MYSQL_RANDOM_ROOT_PASSWORD: "true"
-          MYSQL_USER: "{{ db_user_name | string }}"
-          MYSQL_PASSWORD: "{{ db_user_pass | string }}"
-          MYSQL_DATABASE: "{{ db_name | string }}"
-        networks:
-          - name: "{{ network_name }}"
-        healthcheck:
-          test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $MYSQL_USER --password=$MYSQL_PASSWORD"]
-          interval: 2s
-          start_period: 30s
-        state: "healthy"
-    - name: start vikunja container
-      community.docker.docker_container:
-        name: vikunja
-        image: vikunja/vikunja
-        volumes:
-          - ./files:/app/vikunja/files
-        env:
-          VIKUNJA_DATABASE_HOST: "db"
-          VIKUNJA_DATABASE_USER: "{{ db_user_name | string }}"
-          VIKUNJA_DATABASE_PASSWORD: "{{ db_user_pass | string }}"
-          VIKUNJA_DATABASE_TYPE: "mysql"
-          VIKUNJA_DATABASE_DATABASE: "{{ db_name | string }}"
-          VIKUNJA_SERVICE_JWTSECRET: "{{ jwt_secret | string }}"
-        published_ports:
-          - 3456:3456
-        networks:
-          - name: "{{ network_name }}"
-        detach: true
-    - name: start reverse-proxy container (http)
-      community.docker.docker_container:
-        name: rproxy
-        image: nginx:1.27
-        volumes:
-          - "{{ project_dir }}/default-{{ uri_scheme }}.conf:/etc/nginx/conf.d/default.conf"
-        published_ports:
-          - 80:80
-          - 443:443
-        networks:
-          - name: "{{ network_name }}"
-      when: uri_scheme == "http"
-    - name: start reverse-proxy container (https)
-      community.docker.docker_container:
-        name: rproxy
-        image: nginx:1.27
-        volumes:
-          - "{{ cert_basedir | default(omit) }}/{{ acme_challenge_dir }}/:/usr/share/nginx/html/{{ acme_challenge_dir }}/"
-          - "{{ project_dir }}/default-{{ uri_scheme }}.conf:/etc/nginx/conf.d/default.conf"
-          - "{{ cert_path | default(omit) }}:/etc/nginx/ssl/{{ cert_file}}"
-          - "{{ cert_private_key_path | default(omit) }}:/etc/nginx/ssl/{{ cert_private_key_file }}"
-        published_ports:
-          - 80:80
-          - 443:443
-        networks:
-          - name: "{{ network_name }}"
-      when: uri_scheme == "https"
+        name: "vikunja-net"
+    - name: start containers
+      community.docker.docker_compose_v2:
+        project_src: "{{ project_dir }}"
+        state: present
   tags:
     - deploy

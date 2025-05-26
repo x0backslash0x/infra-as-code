@@ -18,12 +18,13 @@ Role Variables
 --------------
 
 * ansible_user
+* docker_user
 * project_dir
 * db_user_name
 * db_user_pass
 * db_name
 * jwt_secret
-* network_name
+* uri_scheme
 
 Dependencies
 ------------

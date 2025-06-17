@@ -33,23 +33,6 @@ The role *certify* fails to run when the variable *url_scheme* is not defined.
 This variable is used to decide whether or not the role should run.
 
 
-## BUG20250616-2
-**title**</br>
-host rebooted even when it's not needed
-
-**context**</br>
-role execution - dockerinstall
-
-**description**</br>
-The *dockerinstall* role contains a step that reboots the host.
-If docker is already installed, there is no need to reboot the host.
-Unnecessary reboots need to be avoided as much as possible.
-
-**resolution**</br>
-One solution for this is to run the role conditionally.
-The condition should check whether the docker-ce package is installed on the host.
-
-
 ## BUG20250617-1
 **title**</br>
 Cannot issue cert for localhost
@@ -93,3 +76,22 @@ The role *dockerinstall* does not set the variable *docker_user* explicitly. It 
 
 **resolution**</br>
 Pass the variable explicitly when calling the role in the playbook.
+
+
+## BUG20250616-2
+**title**</br>
+host rebooted even when it's not needed
+
+**context**</br>
+role execution - dockerinstall
+
+**description**</br>
+The *dockerinstall* role contains a step that reboots the host.
+If docker is already installed, there is no need to reboot the host.
+Unnecessary reboots need to be avoided as much as possible.
+
+**resolution**</br>
+One solution for this is to run the role conditionally.
+The condition should check whether the docker-ce package is installed on the host.
+
+The implemented solution uses a handler within the *dockerinstall* role for performing the reboot.

@@ -55,7 +55,4 @@
     append: true
     groups: docker
     name: "{{ docker_user }}"
-
-- name: (12/12) reboot
-  import_role:
-    name: reboot
+  notify: "reboot host"

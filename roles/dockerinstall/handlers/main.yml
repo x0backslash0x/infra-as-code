@@ -1,2 +1,5 @@
 ---
 # handlers file for dockerinstall
+- name: reboot
+  ansible.builtin.reboot:
+  listen: "reboot host"

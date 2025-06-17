@@ -74,12 +74,26 @@ Let's Encrypt does not allow the use of *localhost* as Common Name.
 So calling the playbook with *cn=localhost* summons the above error
 
 
+## BUG20250617-2
+**name**</br>
+undefined variable *docker_user* for vikunja role
+
+**context**</br>
+variable scope outside the role
+
+**description**</br>
+![undefined variable error](./info/ansibe_missing-variable_docker_user.png)
+The vikunja role uses a variable *docker_user*
+The variable is expected to be inherited through the playbook, from a previous role *dockerinstall*
+The role *dockerinstall* does not set the variable *docker_user* explicitly. It is passed from the playbook.
+
 
 # open bugs
 * BUG20250520-2
 * BUG20250616-1
 * BUG20250616-2
 * BUG20250617-1
+* BUG20250617-2
 
 
 

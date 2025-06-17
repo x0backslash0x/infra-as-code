@@ -33,21 +33,6 @@ The role *certify* fails to run when the variable *url_scheme* is not defined.
 This variable is used to decide whether or not the role should run.
 
 
-## BUG20250617-3
-**title**</br>
-no host names matched
-
-**context**</br>
-playbook execution, host lookup
-
-**description**</br>
-The host definition in the playbook does not always match what is in the hosts file.
-Changing the host definition in the playbook requires changing the host naming in the hosts file.
-
-**resolution**</br>
-pass host name as command variable
-
-
 
 # closed bugs
 ## BUG20250520-1
@@ -113,3 +98,18 @@ One solution for this is to run the role conditionally.
 The condition should check whether the docker-ce package is installed on the host.
 
 The implemented solution uses a handler within the *dockerinstall* role for performing the reboot.
+
+
+## BUG20250617-3
+**title**</br>
+no host names matched
+
+**context**</br>
+playbook execution, host lookup
+
+**description**</br>
+The host definition in the playbook does not always match what is in the hosts file.
+Changing the host definition in the playbook requires changing the host naming in the hosts file.
+
+**resolution**</br>
+pass host name as command variable

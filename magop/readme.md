@@ -34,8 +34,9 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 |-------------|---------------------|-------------------------------------------|
 | user        | playbook invocation | remote user                               |
 | cn          | playbook invocation | common name for certificate               |
-| uri_scheme  | playbook invocation | use HTTP or HTTPS for nginx               |
+| host        | playbook invocation | the ansible host (default: local)         |
 | provider    | playbook invocation | self-signed (default) or letsencrypt      |
+| uri_scheme  | playbook invocation | use HTTP or HTTPS for nginx               |
 | project_dir | playbook            | absolute path for project files           |
 
 # Installatie Vikunja

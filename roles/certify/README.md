@@ -14,11 +14,11 @@ The Let's Encrypt validation procedure relies on an nginx container for facilita
 Role Variables
 --------------
 
-| variable                  | scope                        |
-|---------------------------|------------------------------|
+| variable                  | scope                        | description               |
+|---------------------------|------------------------------|---------------------------|
 | cert_commonname           | role invocation              |
 | start_dir                 | role invocation              |
-| provider                  | self                         |
+| cert_provider             | self                         | self-signed / letsencrypt |
 | acme_directory_production | self                         |
 | acme_directory_staging    | self                         |
 | acme_account_key          | self                         |

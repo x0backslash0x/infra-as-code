@@ -30,12 +30,13 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 
 # variables
 
-| variable    | scope               | description                     |
-|-------------|---------------------|---------------------------------|
-| user        | playbook invocation | remote user                     |
-| cn          | playbook invocation | common name for certificate     |
-| uri_scheme  | playbook invocation | use HTTP or HTTPS for nginx     |
-| project_dir | playbook            | absolute path for project files |
+| variable    | scope               | description                               |
+|-------------|---------------------|-------------------------------------------|
+| user        | playbook invocation | remote user                               |
+| cn          | playbook invocation | common name for certificate               |
+| uri_scheme  | playbook invocation | use HTTP or HTTPS for nginx               |
+| provider    | playbook invocation | self-signed (default) or letsencrypt      |
+| project_dir | playbook            | absolute path for project files           |
 
 # Installatie Vikunja
 ## basic install 1
@@ -89,5 +90,5 @@ bestanden aanmaken
 
 playbook uitvoeren
 ```
-ansible-playbook playbook.yml -e user=<username> -e cn=<common name> -e uri_scheme=<http|https> -K
+ansible-playbook playbook.yml [-e host=<host>] -e user=<username> -e cn=<common name> [-e provider=<self-signed|letsencrypt> -e uri_scheme=<http|https>] -K
 ```

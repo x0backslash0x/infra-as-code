@@ -18,6 +18,7 @@
       vars:
         start_dir: "{{ project_dir }}"
         cert_commonname: "{{ cn }}"
+        cert_provider: "{{ provider | default('self-signed') }}"
       tags: cert
       when: uri_scheme == "https"
 

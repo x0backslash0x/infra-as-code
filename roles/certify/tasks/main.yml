@@ -24,7 +24,7 @@
     type: "RSA"
     size: 4096
     mode: "600"
-  when: provider == "letsencrypt"
+  when: cert_provider == "letsencrypt"
 
   # check for an existing valid request first
 - name: create signing request
@@ -81,7 +81,7 @@
             name: validation
             state: stopped
       when: http_challenge is changed and cert_commonname in http_challenge['challenge_data']
-  when: provider == "letsencrypt"
+  when: cert_provider == "letsencrypt"
 
 - name: generate self-signed certificate
   community.crypto.x509_certificate:
@@ -92,7 +92,7 @@
     selfsigned_not_after: +3m  # valid for 3 months
     path: "{{ cert_path }}"
     mode: "644"
-  when: provider == "self-signed"
+  when: cert_provider == "self-signed"
 
 - name: add facts
   ansible.builtin.set_fact:

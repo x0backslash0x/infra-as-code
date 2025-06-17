@@ -1,6 +1,6 @@
 ---
 # vars file for certify
-provider: "letsencrypt"
+# cert_provider: "letsencrypt"
 acme_directory_production: "https://acme-v02.api.letsencrypt.org/directory"
 acme_directory_staging: "https://acme-staging-v02.api.letsencrypt.org/directory"
 cert_basedir: "{{ start_dir }}/ssl"

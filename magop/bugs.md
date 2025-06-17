@@ -33,20 +33,6 @@ The role *certify* fails to run when the variable *url_scheme* is not defined.
 This variable is used to decide whether or not the role should run.
 
 
-## BUG20250617-1
-**title**</br>
-Cannot issue cert for localhost
-
-**context**</br>
-Let's Encrypt certificate request
-
-**description**</br>
-![Let's Encrypt error](./info/letsencrypt_invalid-cn-localhost.png)
-Let's Encrypt does not allow the use of *localhost* as Common Name.
-
-So calling the playbook with *cn=localhost* summons the above error
-
-
 ## BUG20250617-3
 **title**</br>
 no host names matched
@@ -74,6 +60,23 @@ nginx container
 **description**</br>
 ![container log](info/docker-rproxy_cannot-load-certificate-no-start-line.png)</br>
 nginx cannot load the Let's Encrypt certificate
+
+
+## BUG20250617-1
+**title**</br>
+Cannot issue cert for localhost
+
+**context**</br>
+Let's Encrypt certificate request
+
+**description**</br>
+![Let's Encrypt error](./info/letsencrypt_invalid-cn-localhost.png)
+Let's Encrypt does not allow the use of *localhost* as Common Name.
+
+So calling the playbook with *cn=localhost* summons the above error
+
+**resolution**</br>
+pass a variable when calling the *certify* role to select a provider dynamically.
 
 
 ## BUG20250617-2

@@ -45,9 +45,29 @@ The role *certify* fails to run when the variable *url_scheme* is not defined.
 This variable is used to decide whether or not the role should run.
 
 
+## BUG20250616-2
+**name**</br>
+host rebooted even when it's not needed
+
+
+**context**</br>
+role execution - dockerinstall
+
+
+**description**</br>
+The *dockerinstall* role contains a step that reboots the host.
+If docker is already installed, there is no need to reboot the host.
+Unnecessary reboots need to be avoided as much as possible.
+
+**resolution**</br>
+One solution for this is to run the role conditionally.
+The condition should check whether the docker-ce package is installed on the host.
+
+
 # open bugs
 * BUG20250520-2
 * BUG20250616-1
+* BUG20250616-2
 
 
 # closed bugs

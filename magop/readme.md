@@ -30,9 +30,12 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 
 # variables
 
-* user
-* cn
-* uri_scheme
+| variable    | scope               | description                     |
+|-------------|---------------------|---------------------------------|
+| user        | playbook invocation | remote user                     |
+| cn          | playbook invocation | common name for certificate     |
+| uri_scheme  | playbook invocation | use HTTP or HTTPS for nginx     |
+| project_dir | playbook            | absolute path for project files |
 
 # Installatie Vikunja
 ## basic install 1

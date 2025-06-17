@@ -14,21 +14,24 @@ The Let's Encrypt validation procedure relies on an nginx container for facilita
 Role Variables
 --------------
 
-* start_dir
-* provider
-* acme_directory_production
-* acme_directory_staging
-* acme_account_key
-* acme_challenge_dir
-* cert_basedir
-* cert_commonname
-* cert_privatekey_path
-* cert_privatekey_file
-* cert_csr
-* cert_path
-* cert_file
-* cert_chain
-* cert_fullchain
+| variable                  | scope                        |
+|---------------------------|------------------------------|
+| cert_commonname           | role invocation              |
+| start_dir                 | role invocation              |
+| provider                  | self                         |
+| acme_directory_production | self                         |
+| acme_directory_staging    | self                         |
+| acme_account_key          | self                         |
+| acme_challenge_dir        | self                         |
+| cert_basedir              | self                         |
+| cert_privatekey_path      | self                         |
+| cert_privatekey_file      | self                         |
+| cert_csr                  | self                         |
+| cert_path                 | self                         |
+| cert_file                 | self                         |
+| cert_chain                | self                         |
+| cert_fullchain            | self                         |
+| http_challenge            | tasks/Letsencrypt validation |
 
 
 Dependencies

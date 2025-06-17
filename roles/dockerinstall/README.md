@@ -22,9 +22,12 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-* docker_official_repo: url to the official docker repository for RHEL
-* docker_dependencies: list of packages to install alongside docker
-* user: user to add to the docker group
+| variable                | scope           | description                                    |
+|-------------------------|-----------------|------------------------------------------------|
+| docker_user             | role invocation | user to add to the docker group                |
+| docker_official_repo    | self            | url to the official docker repository for RHEL |
+| docker_dependencies     | self            | list of packages to install alongside docker   |
+| ansible_facts.os_family | playbook facts  | Linux distribution type of the host            |
 
 Dependencies
 ------------

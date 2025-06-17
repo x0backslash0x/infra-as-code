@@ -1,4 +1,4 @@
-Role Vikunja
+self Vikunja
 =========
 
 Deploys the vikunja todo app using docker containers.
@@ -14,22 +14,30 @@ Requirements
 Docker must be installed
 The ansible_user must have access rights to run the docker command
 
-Role Variables
+self Variables
 --------------
 
-* ansible_user
-* docker_user
-* project_dir
-* db_user_name
-* db_user_pass
-* db_name
-* jwt_secret
-* uri_scheme
+|   variable            |   scope                |
+|-----------------------|------------------------|
+| project_dir           | playbook               |
+| uri_scheme            | playbook               |
+| acme_challenge_dir    | certify role           |
+| cert_commonname       | certify role           |
+| cert_basedir          | certify role           |
+| cert_file             | certify role           | 
+| cert_path             | certify role           |
+| cert_private_key_file | certify role           |
+| cert_private_key_path | certify role           |
+| docker_user           | dockerinstall role     |
+| db_user_name          | self                   |
+| db_user_pass          | self                   |
+| db_name               | self                   | 
+| jwt_secret            | self                   |
 
 Dependencies
 ------------
 
-This role relies on the existence of the `certify` role
+This self relies on the existence of the `certify` self
 
 collections:
 * community.docker
@@ -43,8 +51,8 @@ Example Playbook
 ----------------
 
     - hosts: servers
-      roles:
-        - { role: vikunja }
+      selfs:
+        - { self: vikunja }
 
 License
 -------
@@ -54,4 +62,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+An optional section for the self authors to include contact information, or a website (HTML is not allowed).

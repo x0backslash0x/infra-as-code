@@ -1,26 +1,16 @@
-# bugs
+# open bugs
 ## BUG template
-**name**</br>
+**title**</br>
 
 **context**</br>
 
 **description**</br>
 
-
-## BUG20250520-1
-**name**</br>
-cannot load certificate - no start line
-
-**context**</br>
-nginx container
-
-**description**</br>
-![container log](info/docker-rproxy_cannot-load-certificate-no-start-line.png)</br>
-nginx cannot load the Let's Encrypt certificate
+**resolution**</br>
 
 
 ## BUG20250520-2
-**name**</br>
+**title**</br>
 extra dirs created
 
 **context**</br>
@@ -31,7 +21,7 @@ the directories `db` and `files` are also created at the user home directory
 
 
 ## BUG20250616-1
-**name**</br>
+**title**</br>
 playbook execution fails when variable is undefined
 
 **context**</br>
@@ -44,7 +34,7 @@ This variable is used to decide whether or not the role should run.
 
 
 ## BUG20250616-2
-**name**</br>
+**title**</br>
 host rebooted even when it's not needed
 
 **context**</br>
@@ -61,7 +51,7 @@ The condition should check whether the docker-ce package is installed on the hos
 
 
 ## BUG20250617-1
-**name**</br>
+**title**</br>
 Cannot issue cert for localhost
 
 **context**</br>
@@ -74,8 +64,22 @@ Let's Encrypt does not allow the use of *localhost* as Common Name.
 So calling the playbook with *cn=localhost* summons the above error
 
 
+
+# closed bugs
+## BUG20250520-1
+**title**</br>
+cannot load certificate - no start line
+
+**context**</br>
+nginx container
+
+**description**</br>
+![container log](info/docker-rproxy_cannot-load-certificate-no-start-line.png)</br>
+nginx cannot load the Let's Encrypt certificate
+
+
 ## BUG20250617-2
-**name**</br>
+**title**</br>
 undefined variable *docker_user* for vikunja role
 
 **context**</br>
@@ -89,16 +93,3 @@ The role *dockerinstall* does not set the variable *docker_user* explicitly. It 
 
 **resolution**</br>
 Pass the variable explicitly when calling the role in the playbook.
-
-
-# open bugs
-* BUG20250520-2
-* BUG20250616-1
-* BUG20250616-2
-* BUG20250617-1
-
-
-
-# closed bugs
-* BUG20250520-1
-* BUG20250617-2

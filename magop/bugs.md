@@ -47,6 +47,21 @@ Let's Encrypt does not allow the use of *localhost* as Common Name.
 So calling the playbook with *cn=localhost* summons the above error
 
 
+## BUG20250617-3
+**title**</br>
+no host names matched
+
+**context**</br>
+playbook execution, host lookup
+
+**description**</br>
+The host definition in the playbook does not always match what is in the hosts file.
+Changing the host definition in the playbook requires changing the host naming in the hosts file.
+
+**resolution**</br>
+pass host name as command variable
+
+
 
 # closed bugs
 ## BUG20250520-1

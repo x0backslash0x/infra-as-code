@@ -2,9 +2,7 @@
 ## BUG template
 **name**</br>
 
-
 **context**</br>
-
 
 **description**</br>
 
@@ -20,6 +18,7 @@ nginx container
 ![container log](info/docker-rproxy_cannot-load-certificate-no-start-line.png)</br>
 nginx cannot load the Let's Encrypt certificate
 
+
 ## BUG20250520-2
 **name**</br>
 extra dirs created
@@ -30,14 +29,13 @@ file creation
 **description**</br>
 the directories `db` and `files` are also created at the user home directory
 
+
 ## BUG20250616-1
 **name**</br>
 playbook execution fails when variable is undefined
 
-
 **context**</br>
 playbook invocation
-
 
 **description**</br>
 ![ansible error](./info/ansibe_missing-variable_uri_scheme.png)
@@ -49,10 +47,8 @@ This variable is used to decide whether or not the role should run.
 **name**</br>
 host rebooted even when it's not needed
 
-
 **context**</br>
 role execution - dockerinstall
-
 
 **description**</br>
 The *dockerinstall* role contains a step that reboots the host.
@@ -64,10 +60,27 @@ One solution for this is to run the role conditionally.
 The condition should check whether the docker-ce package is installed on the host.
 
 
+## BUG20250617-1
+**name**</br>
+Cannot issue cert for localhost
+
+**context**</br>
+Let's Encrypt certificate request
+
+**description**</br>
+![Let's Encrypt error](./info/letsencrypt_invalid-cn-localhost.png)
+Let's Encrypt does not allow the use of *localhost* as Common Name.
+
+So calling the playbook with *cn=localhost* summons the above error
+
+
+
 # open bugs
 * BUG20250520-2
 * BUG20250616-1
 * BUG20250616-2
+* BUG20250617-1
+
 
 
 # closed bugs

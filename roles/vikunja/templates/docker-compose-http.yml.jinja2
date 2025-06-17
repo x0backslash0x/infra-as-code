@@ -8,6 +8,7 @@ services:
       - 80:80
     networks:
       - vikunja-net
+      - frontend
     depends_on:
       db:
         condition: service_healthy
@@ -27,7 +28,8 @@ services:
     ports:
       - 3456:3456
     networks:
-      - vikunja-net
+      - frontend
+      - db
     depends_on:
       db:
         condition: service_healthy
@@ -43,7 +45,7 @@ services:
       MYSQL_PASSWORD: "{{ db_user_pass }}"
       MYSQL_DATABASE: "{{ db_name }}"
     networks:
-      - vikunja-net
+      - db
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"]
       interval: 2s
@@ -52,3 +54,9 @@ services:
 networks:
   vikunja-net:
     external: true
+  frontend:
+    name: frontend
+    internal: true
+  db:
+    name: db
+    internal: true

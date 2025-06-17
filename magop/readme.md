@@ -13,6 +13,7 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 
 ***ansible modules**
 * acme_certificates
+* ansible.builtin.package_facts
 * ansible.builtin.file
 * ansible.builtin.template
 * ansible.builtin.copy

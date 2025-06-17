@@ -1,0 +1,21 @@
+- name: experiment with package facts
+  hosts: local
+  gather_facts: false
+  vars:
+    package: "docker-ce"
+  tasks:
+    - name: gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
+    - name: print facts
+      block:
+        - name: package is not installed
+          ansible.builtin.debug:
+            #msg: "{{ ansible_facts.packages['{{ package }}'] }}"
+            msg: "{{ package }} is not installed"
+          when: package not in ansible_facts.packages
+        - name: package is installed
+          ansible.builtin.debug:
+            #msg: "{{ ansible_facts.packages['{{ package }}'] }}"
+            msg: "{{ package }} is installed"
+          when: package in ansible_facts.packages

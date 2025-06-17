@@ -7,6 +7,13 @@ For now only installs on RHEL & Debian based distributions.
 [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
 [Install Docker Engine on RHEL](https://docs.docker.com/engine/install/rhel/)
 
+Following packages are installed
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
 Modules
 ------------
 List of modules used in the role

@@ -17,22 +17,22 @@ The ansible_user must have access rights to run the docker command
 Role Variables
 --------------
 
-|   variable            |   scope                |
-|-----------------------|------------------------|
-| project_dir           | playbook               |
-| uri_scheme            | playbook               |
-| acme_challenge_dir    | certify role           |
-| cert_commonname       | certify role           |
-| cert_basedir          | certify role           |
-| cert_file             | certify role           | 
-| cert_path             | certify role           |
-| cert_private_key_file | certify role           |
-| cert_private_key_path | certify role           |
-| docker_user           | role invocation        |
-| db_user_name          | self                   |
-| db_user_pass          | self                   |
-| db_name               | self                   | 
-| jwt_secret            | self                   |
+|   variable            |   scope                   |
+|-----------------------|---------------------------|
+| project_dir           | playbook                  |
+| uri_scheme            | playbook                  |
+| acme_challenge_dir    | certify role, added facts |
+| cert_commonname       | certify role, added facts |
+| cert_basedir          | certify role, added facts |
+| cert_file             | certify role, added facts | 
+| cert_path             | certify role, added facts |
+| cert_private_key_file | certify role, added facts |
+| cert_private_key_path | certify role, added facts |
+| docker_user           | role invocation           |
+| db_user_name          | self                      |
+| db_user_pass          | self                      |
+| db_name               | self                      | 
+| jwt_secret            | self                      |
 
 Dependencies
 ------------

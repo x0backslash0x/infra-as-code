@@ -6,15 +6,25 @@
     - "os_family"
   remote_user: "{{ user }}"
   become: yes
-  roles:
+  tasks:
       # docker installeren
-    - role: dockerinstall
-      vars:
-        docker_user: "{{ user }}"
+    - name: Install Docker
+      block:
+        - name: gather package facts
+          ansible.builtin.package_facts:
+            manager: auto
+        - name: install Docker
+          ansible.builtin.import_role:
+            name: dockerinstall
+          vars:
+            docker_user: "{{ user }}"
+          when: package not in ansible_facts.packages
       tags: docker
 
     # SSL certifikaat aanmaken
-    - role: certify
+    - name: Request SSL certificate
+      ansible.builtin.import_role:
+        name: certify
       vars:
         start_dir: "{{ project_dir }}"
         cert_commonname: "{{ cn }}"
@@ -23,10 +33,13 @@
       when: uri_scheme == "https"
 
     # containers opzetten
-    - role: vikunja
+    - name: Deploy vikunja containers
+      ansible.builtin.import_role:
+        name: vikunja
       vars:
         docker_user: "{{ user }}"
       tags: vikunja
 
   vars:
     project_dir: "/home/{{ ansible_user }}/vikunja"
+    package: "docker-ce"

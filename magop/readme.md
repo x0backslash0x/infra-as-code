@@ -1,7 +1,7 @@
 # Overzicht
 Het verloop van deze play valt grotendeels op de delen in volgende stappen
-* docker installeren
-* SSL certifikaat aanmaken
+* docker installeren (wordt overgeslagen als docker al geïnstalleerd is)
+* SSL certifikaat aanmaken (wordt overgeslagen wanneer uri_scheme op http staat)
 * containers opzetten
 
 # Depencencies
@@ -11,7 +11,7 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 * certify
 * vikunja
 
-***ansible modules**
+**ansible modules**
 * acme_certificates
 * ansible.builtin.package_facts
 * ansible.builtin.file
@@ -38,6 +38,7 @@ Het verloop van deze play valt grotendeels op de delen in volgende stappen
 | host        | playbook invocation | the ansible host (default: local)         |
 | provider    | playbook invocation | self-signed (default) or letsencrypt      |
 | uri_scheme  | playbook invocation | use HTTP or HTTPS for nginx               |
+| package     | playbook            | one of the docker package dependencies    |
 | project_dir | playbook            | absolute path for project files           |
 
 # Installatie Vikunja

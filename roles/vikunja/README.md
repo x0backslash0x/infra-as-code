@@ -14,7 +14,7 @@ Requirements
 Docker must be installed
 The ansible_user must have access rights to run the docker command
 
-self Variables
+Role Variables
 --------------
 
 |   variable            |   scope                |
@@ -28,7 +28,7 @@ self Variables
 | cert_path             | certify role           |
 | cert_private_key_file | certify role           |
 | cert_private_key_path | certify role           |
-| docker_user           | dockerinstall role     |
+| docker_user           | role invocation        |
 | db_user_name          | self                   |
 | db_user_pass          | self                   |
 | db_name               | self                   | 
@@ -37,7 +37,7 @@ self Variables
 Dependencies
 ------------
 
-This self relies on the existence of the `certify` self
+This role relies on the existence of the `certify` role
 
 collections:
 * community.docker
@@ -51,8 +51,10 @@ Example Playbook
 ----------------
 
     - hosts: servers
-      selfs:
-        - { self: vikunja }
+      roles:
+      - role: vikunja
+        vars:
+          docker_user: "{{ user }}"
 
 License
 -------
@@ -62,4 +64,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the self authors to include contact information, or a website (HTML is not allowed).
+An optional section for the role authors to include contact information, or a website (HTML is not allowed).

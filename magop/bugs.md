@@ -87,15 +87,18 @@ The vikunja role uses a variable *docker_user*
 The variable is expected to be inherited through the playbook, from a previous role *dockerinstall*
 The role *dockerinstall* does not set the variable *docker_user* explicitly. It is passed from the playbook.
 
+**resolution**</br>
+Pass the variable explicitly when calling the role in the playbook.
+
 
 # open bugs
 * BUG20250520-2
 * BUG20250616-1
 * BUG20250616-2
 * BUG20250617-1
-* BUG20250617-2
 
 
 
 # closed bugs
 * BUG20250520-1
+* BUG20250617-2

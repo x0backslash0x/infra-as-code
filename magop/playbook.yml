@@ -23,6 +23,8 @@
 
     # containers opzetten
     - role: vikunja
+      vars:
+        docker_user: "{{ user }}"
       tags: vikunja
 
   vars:

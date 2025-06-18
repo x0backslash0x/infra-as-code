@@ -1,7 +1,13 @@
 # /etc/nginx/conf.d/default.conf
 server {
     listen       80;
-    #listen  [::]:80;
+    listen  [::]:80;
+    server_name  {{ cert_commonname }};
+
+    return 301 https://$host$request_uri;
+}
+
+server {
     listen  443 ssl;
     server_name  {{ cert_commonname }};
 
